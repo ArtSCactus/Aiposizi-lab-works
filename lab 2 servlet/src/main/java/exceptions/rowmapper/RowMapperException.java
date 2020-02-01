@@ -2,7 +2,7 @@ package exceptions.rowmapper;
 
 import java.sql.SQLException;
 
-public class RowMapperException extends Throwable {
+public class RowMapperException extends RuntimeException{
     public RowMapperException(SQLException e) {
     }
 }
