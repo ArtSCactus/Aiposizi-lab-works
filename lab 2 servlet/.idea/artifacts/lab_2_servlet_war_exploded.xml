@@ -1,16 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="lab 2 servlet:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/lab_2_servlet_war_exploded</output-path>
+  <artifact type="exploded-war" build-on-make="true" name="lab 2 servlet:war exploded">
+    <output-path>C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/lab-2</output-path>
     <root id="root">
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="module-output" name="lab 2 servlet" />
-        </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="mysql:mysql-connector-java:8.0.19" />
-          <element id="library" level="project" name="org.apache.logging.log4j:log4j-api:2.13.0" />
-        </element>
-      </element>
       <element id="javaee-facet-resources" facet="lab 2 servlet/web/Web" />
     </root>
   </artifact>

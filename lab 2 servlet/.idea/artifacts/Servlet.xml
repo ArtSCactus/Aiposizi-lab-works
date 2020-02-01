@@ -1,18 +1,19 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-ear" name="Servlet">
-    <output-path>$PROJECT_DIR$/out/artifacts/Servlet</output-path>
+  <artifact type="exploded-ear" build-on-make="true" name="Servlet">
+    <output-path>C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/lab-2</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="lab 2 servlet" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="javax.servlet:javax.servlet-api:4.0.1" />
-          <element id="library" level="project" name="javax.servlet:jsp-api:2.0" />
-          <element id="library" level="project" name="mysql:mysql-connector-java:8.0.19" />
-          <element id="library" level="project" name="org.apache.logging.log4j:log4j-api:2.13.0" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.3" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.19" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.13.0" />
         </element>
-        <element id="javaee-facet-resources" facet="lab 2 servlet/javaeeApplication/javaEEApplication" />
       </element>
     </root>
   </artifact>
