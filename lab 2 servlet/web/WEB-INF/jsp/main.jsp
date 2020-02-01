@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href="controller?command=show_students">Hey there</a>
+<a href="controller?command=show_teachers">Show teachers</a>
+<a href="controller?command=show_students">Show students</a>
 <c:if test="${not empty requestScope.PageContent.objectsList}">
     <table>
         <tr>

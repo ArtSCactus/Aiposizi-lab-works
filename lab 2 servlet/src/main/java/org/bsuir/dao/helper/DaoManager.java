@@ -2,6 +2,7 @@ package org.bsuir.dao.helper;
 
 import org.bsuir.connection.ConnectionPool;
 import org.bsuir.dao.types.StudentDao;
+import org.bsuir.dao.types.TeacherDao;
 import org.bsuir.exceptions.dao.DaoException;
 
 import java.sql.Connection;
@@ -24,6 +25,10 @@ public class DaoManager implements AutoCloseable {
 
     public StudentDao getStudentDao(){
      return new StudentDao(connection);
+    }
+
+    public TeacherDao getTeacherDao(){
+        return new TeacherDao(connection);
     }
 
     @Override
