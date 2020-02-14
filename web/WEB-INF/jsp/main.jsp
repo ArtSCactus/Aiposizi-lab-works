@@ -7,8 +7,11 @@
 <body>
 <a href="controller?command=show_teachers">Show teachers</a>
 <a href="controller?command=show_students">Show students</a>
-<form method="post" action="controller" />
-    <input type="text" placeholder="Name...">
+<form method="post" action="controller">
+    <input type="text" placeholder="Name..." required="required">
+    <input type="text" placeholder="Surname..." required="required">
+    <input type="text" placeholder="Rating..." required="required">
+    <input type="submit" value="submit">
 </form>
 <c:if test="${not empty requestScope.PageContent.objectsList}">
     <table>
