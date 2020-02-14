@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" build-on-make="true" name="lab 2 servlet:javaEEApplication exploded">
+    <output-path>C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/lab-2</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lab 2 servlet" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.19" />
+        </element>
+        <element id="javaee-facet-resources" facet="lab 2 servlet/javaeeApplication/javaEEApplication" />
+      </element>
+      <element id="javaee-facet-resources" facet="lab 2 servlet/web/Web" />
+    </root>
+  </artifact>
+</component>
