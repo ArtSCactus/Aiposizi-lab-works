@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="lab 2 servlet:javaEEApplication exploded">
+    <output-path>C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/lab-2</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lab 2 servlet/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

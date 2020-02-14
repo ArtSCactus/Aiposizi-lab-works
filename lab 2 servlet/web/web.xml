@@ -9,9 +9,10 @@
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>org.bsuir.controller.Controller</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/lab-2</url-pattern>
     </servlet-mapping>
 </web-app>
