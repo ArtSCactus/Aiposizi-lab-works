@@ -225,11 +225,10 @@ public class ProxyConnection implements Connection, AutoCloseable {
     public void close(){
         try {
             connection.setAutoCommit(true);
-
+            ConnectionPool.getInstance().releaseConnection(this);
         } catch (SQLException e) {
             throw new ConnectionClosingException(e);
         }
-        ConnectionPool.getInstance().releaseConnection(this);
     }
 
     /**

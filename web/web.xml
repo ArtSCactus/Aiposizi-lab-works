@@ -2,10 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
-    <display-name>Aiposizi-lab-2</display-name>
+    <display-name>Aip</display-name>
     <welcome-file-list>
-        <welcome-file>/WEB-INF/jsp/main.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>org.bsuir.controller.Controller</servlet-class>

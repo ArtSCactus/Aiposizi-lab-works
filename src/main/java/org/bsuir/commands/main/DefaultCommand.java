@@ -12,6 +12,6 @@ public class DefaultCommand implements Command {
     private static final String MAIN_PAGE_PATH = "/WEB-INF/main.jsp";
 
     public CommandResult execute(HttpServletRequest request) {
-        return new CommandResult(MAIN_PAGE_PATH, CommandType.POST);
+        return new CommandResult(MAIN_PAGE_PATH, CommandType.GET);
     }
 }

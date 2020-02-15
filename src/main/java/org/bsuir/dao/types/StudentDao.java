@@ -21,7 +21,7 @@ public class StudentDao extends AbstractDao<Student> implements Dao<Student> {
 
     @Override
     public Optional<Student> getById(Long id) {
-        List<Student> students = super.executeQuery(resources.getString("get_all_students_by_id"), new StudentRowMapper(), id);
+        List<Student> students = super.executeQuery(resources.getString("get_student_by_id"), new StudentRowMapper(), id);
         if (students.isEmpty()) {
             return Optional.empty();
         } else {
@@ -46,6 +46,6 @@ public class StudentDao extends AbstractDao<Student> implements Dao<Student> {
 
     @Override
     public void removeById(Long id) {
-
+        super.executeUpdate(resources.getString("delete_student_by_id"), id);
     }
 }

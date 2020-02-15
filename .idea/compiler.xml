@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lab 2 servlet" />
+        <module name="Aiposizi-lab-works" />
       </profile>
     </annotationProcessing>
   </component>
