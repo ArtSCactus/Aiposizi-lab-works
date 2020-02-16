@@ -21,7 +21,7 @@ public class TeacherDao extends AbstractDao<Teacher> implements Dao<Teacher> {
     @Override
     public Optional<Teacher> getById(Long id) {
         List<Teacher> teachers = super.executeQuery(resources.getString("get_teacher_by_id"), new TeacherRowMapper(), id);
-        if (teachers.isEmpty()){
+        if (teachers.isEmpty()) {
             return Optional.empty();
         } else {
             return Optional.of(teachers.get(0));
@@ -35,11 +35,14 @@ public class TeacherDao extends AbstractDao<Teacher> implements Dao<Teacher> {
 
     @Override
     public int save(Teacher item) {
-        return 0;
+        return super.executeUpdate(resources.getString("insert_odku_teacher"),
+                item.getId(),
+                item.getName(),
+                item.getSurname());
     }
 
     @Override
-    public void removeById(Long id) {
-
+    public int removeById(Long id) {
+        return super.executeUpdate(resources.getString("delete_teacher_by_id"), id);
     }
 }

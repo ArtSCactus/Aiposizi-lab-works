@@ -45,7 +45,7 @@ public class StudentDao extends AbstractDao<Student> implements Dao<Student> {
     }
 
     @Override
-    public void removeById(Long id) {
-        super.executeUpdate(resources.getString("delete_student_by_id"), id);
+    public int removeById(Long id) {
+       return super.executeUpdate(resources.getString("delete_student_by_id"), id);
     }
 }

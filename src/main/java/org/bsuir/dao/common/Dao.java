@@ -10,5 +10,5 @@ public interface Dao<T> {
 
     int save(T item);
 
-    void removeById(Long id);
+    int removeById(Long id);
 }
