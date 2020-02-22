@@ -32,7 +32,7 @@ public class DaoManager implements AutoCloseable {
         return new TeacherDao(connection);
     }
 
-    public LessonDao getLessonDao() {
+    public LessonDao getLessonDao(){
         return new LessonDao(connection);
     }
 

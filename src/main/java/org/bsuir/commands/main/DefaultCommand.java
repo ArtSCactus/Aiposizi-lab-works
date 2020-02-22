@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class DefaultCommand implements Command {
-    private static final String MAIN_PAGE_PATH = "/WEB-INF/main.jsp";
+    private static final String MAIN_PAGE_PATH = "/WEB-INF/jsp/main.jsp";
 
     public CommandResult execute(HttpServletRequest request) {
         return new CommandResult(MAIN_PAGE_PATH, CommandType.GET);

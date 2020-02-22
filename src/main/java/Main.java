@@ -1,7 +1,13 @@
+import org.bsuir.connection.ConnectionPool;
+
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class Main {
     public static void main(String[] args){
-        System.out.println(ResourceBundle.getBundle("requests/SQL requests").getString("get_all_students"));
+       Connection pool =  ConnectionPool.getInstance().getConnection();
+       if (pool==null){
+           System.out.println("FUCK!");
+       }
     }
 }

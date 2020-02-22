@@ -3,39 +3,58 @@ package org.bsuir.commands.main;
 import org.bsuir.commands.ShowStudentsCommand;
 import org.bsuir.commands.ShowTeachersCommand;
 import org.bsuir.commands.get.FindStudent;
-import org.bsuir.commands.post.AddStudentCommand;
-import org.bsuir.commands.post.DeleteStudent;
-import org.bsuir.commands.post.UpdateStudent;
+import org.bsuir.commands.get.FindTeacher;
+import org.bsuir.commands.post.*;
 
 public enum CommandEnum {
-    SHOW_STUDENTS{
+    SHOW_STUDENTS {
         {
             this.command = new ShowStudentsCommand();
         }
     },
-    SHOW_TEACHERS{
+    SHOW_TEACHERS {
         {
             this.command = new ShowTeachersCommand();
         }
     },
-    ADD_STUDENT{
+    ADD_STUDENT {
         {
-            this.command = new AddStudentCommand();
+            this.command = new AddStudent();
         }
     },
-    DELETE_STUDENT{
+    DELETE_STUDENT {
         {
             this.command = new DeleteStudent();
         }
     },
-    GET_STUDENT{
+    GET_STUDENT {
         {
             this.command = new FindStudent();
         }
     },
-    UPDATE_STUDENT{
+    UPDATE_STUDENT {
         {
             this.command = new UpdateStudent();
+        }
+    },
+    UPDATE_TEACHER {
+        {
+            this.command = new UpdateTeacher();
+        }
+    },
+    DELETE_TEACHER {
+        {
+            this.command = new DeleteTeacher();
+        }
+    },
+    GET_TEACHER{
+        {
+            this.command = new FindTeacher();
+        }
+    },
+    ADD_TEACHER{
+        {
+            this.command = new AddTeacher();
         }
     };
     Command command;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author ArtSCactus
  * @version 1.0
  */
-public class AddStudentCommand implements Command {
+public class AddStudent implements Command {
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
     private static final String RATING = "rating";

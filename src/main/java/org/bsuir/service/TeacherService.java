@@ -9,24 +9,38 @@ import java.util.List;
 import java.util.Optional;
 
 public class TeacherService {
-    public List<Teacher> getAllTeachers(){
-        try(DaoManager dao = DaoFactory.createDaoManager()){
+    public List<Teacher> getAllTeachers() {
+        try (DaoManager dao = DaoFactory.createDaoManager()) {
             TeacherDao teacherDao = dao.getTeacherDao();
             return teacherDao.getAll();
         }
     }
 
-    public Optional<Teacher> getTeacherById(Long id){
-        try(DaoManager dao = DaoFactory.createDaoManager()){
+    public void createTeacher(String name, String surname) {
+        try (DaoManager dao = DaoFactory.createDaoManager()) {
+            TeacherDao teacherDao = dao.getTeacherDao();
+            teacherDao.save(new Teacher(null, name, surname));
+        }
+    }
+
+    public Optional<Teacher> getById(Long id) {
+        try (DaoManager dao = DaoFactory.createDaoManager()) {
             TeacherDao teacherDao = dao.getTeacherDao();
             return teacherDao.getById(id);
         }
     }
 
-    public void update(Teacher teacher){
-        try(DaoManager dao = DaoFactory.createDaoManager()){
-            TeacherDao teacherDao =  dao.getTeacherDao();
-            teacherDao.save(teacher);
+    public int update(Teacher teacher) {
+        try (DaoManager dao = DaoFactory.createDaoManager()) {
+            TeacherDao teacherDao = dao.getTeacherDao();
+            return teacherDao.save(teacher);
+        }
+    }
+
+    public void removeById(Long id) {
+        try (DaoManager dao = DaoFactory.createDaoManager()) {
+            TeacherDao teacherDao = dao.getTeacherDao();
+            teacherDao.removeById(id);
         }
     }
 }
