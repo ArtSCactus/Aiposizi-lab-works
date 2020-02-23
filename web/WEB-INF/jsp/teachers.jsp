@@ -1,15 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="header.jsp"%>
 <html>
 <head>
     <title>Teachers</title>
-    <c:set var="pageContent" value="${requestScope.PageContent}"/>
     <%--@elvariable id="foundTeacher" type="org.bsuir.dto.Teacher"--%>
     <c:set var="foundTeacher" value="${pageContent.attributes.get('foundTeacher')}"/>
 </head>
 <body>
-<a href="controller?command=show_teachers">Show teachers</a>
-<a href="controller?command=show_students">Show students</a>
 <form method="POST" action="controller">
     <input type="text" name="name" placeholder="Name..." required="required">
     <input type="text" name="surname" placeholder="Surname..." required="required">
@@ -40,7 +37,7 @@
         </form>
     </c:otherwise>
 </c:choose>
-<c:if test="${not empty requestScope.PageContent.objectsList}">
+<c:if test="${not empty requestScope.PageContent.tableContent}">
     <table>
         <tr>
             <th>id</th>
@@ -48,7 +45,7 @@
             <th>surname</th>
         </tr>
             <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
-        <c:forEach var="teacher" items="${requestScope.PageContent.objectsList}">
+        <c:forEach var="teacher" items="${requestScope.PageContent.tableContent}">
             <tr>
                 <td>${teacher.id}</td>
                 <td>${teacher.name}</td>

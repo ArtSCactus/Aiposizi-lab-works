@@ -25,13 +25,13 @@ public class FindStudent implements Command {
         List<Student> students = service.getAllStudents();
         Optional<Student> studentOptional= service.getById(id);
         PageContent content = new PageContent();
-        content.setObjectsList(students);
+        content.setTableContent(students);
         if(studentOptional.isPresent()){
             Student student = studentOptional.get();
-            content.setAttribute("found student", student);
+            content.setAttribute("foundStudent", student);
             request.setAttribute("PageContent", content);
         } else {
-            content.setAttribute("found student", null);
+            content.setAttribute("foundStudent", null);
             request.setAttribute("PageContent", content);
         }
         return new CommandResult(REDIRECT_URL, CommandType.GET);

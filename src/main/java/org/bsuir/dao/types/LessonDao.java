@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 public class LessonDao extends AbstractDao<Lesson> implements Dao<Lesson> {
-    private static final String REQUESTS_PATH = " requests/SQL_requests";
+    private static final String REQUESTS_PATH = "requests/SQL_requests";
     private ResourceBundle requests;
 
     public LessonDao(Connection connection) {
@@ -40,7 +40,7 @@ public class LessonDao extends AbstractDao<Lesson> implements Dao<Lesson> {
 
     @Override
     public int save(Lesson item) {
-        return super.executeUpdate(requests.getString("insert_odku_lesson"),
+        return super.executeUpdate(requests.getString("insert_odku_into_lessons"),
                 item.getId(),
                 item.getTeacherId(),
                 item.getGroupId(),
@@ -49,6 +49,6 @@ public class LessonDao extends AbstractDao<Lesson> implements Dao<Lesson> {
 
     @Override
     public int removeById(Long id) {
-        return super.executeUpdate(requests.getString("delete_lesson"), id);
+        return super.executeUpdate(requests.getString("delete_lesson_by_id"), id);
     }
 }

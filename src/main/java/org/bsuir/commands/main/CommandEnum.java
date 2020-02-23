@@ -1,9 +1,6 @@
 package org.bsuir.commands.main;
 
-import org.bsuir.commands.ShowStudentsCommand;
-import org.bsuir.commands.ShowTeachersCommand;
-import org.bsuir.commands.get.FindStudent;
-import org.bsuir.commands.get.FindTeacher;
+import org.bsuir.commands.get.*;
 import org.bsuir.commands.post.*;
 
 public enum CommandEnum {
@@ -55,6 +52,31 @@ public enum CommandEnum {
     ADD_TEACHER{
         {
             this.command = new AddTeacher();
+        }
+    },
+    SHOW_LESSONS{
+        {
+            this.command = new ShowLessonsCommand();
+        }
+    },
+    ADD_LESSON{
+        {
+            this.command = new AddLesson();
+        }
+    },
+    DELETE_LESSON{
+        {
+            this.command = new DeleteLesson();
+        }
+    },
+    GET_LESSON{
+        {
+            this.command = new FindLesson();
+        }
+    },
+    UPDATE_LESSON{
+        {
+            this.command = new UpdateLesson();
         }
     };
     Command command;

@@ -1,15 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ include file="header.jsp"%>
 <html>
 <head>
-    <title>Title</title>
-    <c:set var="pageContent" value="${requestScope.PageContent}"/>
+    <title>Students</title>
     <%--@elvariable id="foundStudent" type="org.bsuir.dto.Student"--%>
-    <c:set var="foundStudent" value="${pageContent.attributes.get('found student')}"/>
+    <c:set var="foundStudent" value="${pageContent.attributes.get('foundStudent')}"/>
 </head>
 <body>
-<a href="controller?command=show_teachers">Show teachers</a>
-<a href="controller?command=show_students">Show students</a>
 <form method="POST" action="controller">
     <input type="text" name="name" placeholder="Name..." required="required">
     <input type="text" name="surname" placeholder="Surname..." required="required">
@@ -29,7 +27,7 @@
     <input class="find-btn" type="submit" value="find">
 </form>
 <c:choose>
-    <c:when test="${empty pageContent.attributes.get('found student')}">
+    <c:when test="${empty foundStudent}">
         <h3>No student found</h3>
     </c:when>
     <c:otherwise>
@@ -44,7 +42,7 @@
         </form>
     </c:otherwise>
 </c:choose>
-<c:if test="${not empty requestScope.PageContent.objectsList}">
+<c:if test="${not empty requestScope.PageContent.tableContent}">
     <table>
         <tr>
         <th>id</th>
@@ -54,7 +52,7 @@
         <th>group</th>
         </tr>
             <%--@elvariable id="student" type="org.bsuir.dto.Student"--%>
-        <c:forEach var="student" items="${requestScope.PageContent.objectsList}">
+        <c:forEach var="student" items="${requestScope.PageContent.tableContent}">
             <tr>
             <td>${student.id}</td>
             <td>${student.name}</td>

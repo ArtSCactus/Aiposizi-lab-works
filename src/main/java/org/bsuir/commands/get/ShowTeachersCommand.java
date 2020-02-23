@@ -1,4 +1,4 @@
-package org.bsuir.commands;
+package org.bsuir.commands.get;
 
 import org.bsuir.commands.main.Command;
 import org.bsuir.commands.result.CommandResult;

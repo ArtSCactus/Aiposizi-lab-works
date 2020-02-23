@@ -1,4 +1,4 @@
-package org.bsuir.commands;
+package org.bsuir.commands.get;
 
 import org.bsuir.commands.main.Command;
 import org.bsuir.commands.result.CommandResult;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ShowStudentsCommand implements Command {
-    private static final String redirect_url = "/WEB-INF/jsp/main.jsp";
+    private static final String REDIRECT_URL = "/WEB-INF/jsp/main.jsp";
 
     @Override
     public CommandResult execute(HttpServletRequest request) {
@@ -19,6 +19,6 @@ public class ShowStudentsCommand implements Command {
         List<Student> studentList = service.getAllStudents();
         PageContent content = new PageContent(studentList);
         request.setAttribute("PageContent", content);
-        return new CommandResult(redirect_url, CommandType.GET);
+        return new CommandResult(REDIRECT_URL, CommandType.GET);
     }
 }

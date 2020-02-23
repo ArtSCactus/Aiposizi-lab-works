@@ -3,24 +3,24 @@ package org.bsuir.commands.result;
 import java.util.*;
 
 public class PageContent {
-    private List<?> objectsList;
+    private List<?> tableContent;
     private Map<Object, Object> attributes;
 
-    public PageContent(List<?> objectsList) {
-        this.objectsList = objectsList;
+    public PageContent(List<?> tableContent) {
+        this.tableContent = tableContent;
     }
 
     public PageContent() {
-        objectsList = new ArrayList<>();
+        tableContent = new ArrayList<>();
         attributes = new HashMap<>();
     }
 
-    public List<?> getObjectsList() {
-        return objectsList;
+    public List<?> getTableContent() {
+        return tableContent;
     }
 
-    public void setObjectsList(List<?> objectsList) {
-        this.objectsList = objectsList;
+    public void setTableContent(List<?> tableContent) {
+        this.tableContent = tableContent;
     }
 
     public void setAttribute(Object key, Object value){
@@ -44,19 +44,19 @@ public class PageContent {
         if (this == o) return true;
         if (!(o instanceof PageContent)) return false;
         PageContent content = (PageContent) o;
-        return Objects.equals(getObjectsList(), content.getObjectsList()) &&
+        return Objects.equals(getTableContent(), content.getTableContent()) &&
                 Objects.equals(attributes, content.attributes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getObjectsList(), attributes);
+        return Objects.hash(getTableContent(), attributes);
     }
 
     @Override
     public String toString() {
         return "PageContent{" +
-                "objectsList=" + objectsList +
+                "objectsList=" + tableContent +
                 ", attributes=" + attributes +
                 '}';
     }
