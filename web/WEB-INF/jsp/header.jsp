@@ -5,8 +5,9 @@
     <c:set var="pageContent" value="${requestScope.PageContent}"/>
 </head>
 <body>
-<a href="controller?command=show_teachers">Show teachers</a>
-<a href="controller?command=show_students">Show students</a>
-<a href="controller?command=show_lessons">Show lessons</a>
+<a href="controller?command=show_teachers">Teachers</a>
+<a href="controller?command=show_students">Students</a>
+<a href="controller?command=show_lessons">Lessons</a>
+<a href="controller?command=show_subjects">Subjects</a>
 </body>
 </html>

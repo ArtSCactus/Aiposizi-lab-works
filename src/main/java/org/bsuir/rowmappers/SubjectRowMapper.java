@@ -15,7 +15,7 @@ public class SubjectRowMapper implements RowMapper<Subject> {
         try {
             return new Subject(resultSet.getLong(ID_COL_NAME),
                     resultSet.getString(NAME_COL),
-                    resultSet.getString(HOURS_COL_NAME));
+                    resultSet.getInt(HOURS_COL_NAME));
         } catch (SQLException e) {
             throw new RowMapperException(e);
         }

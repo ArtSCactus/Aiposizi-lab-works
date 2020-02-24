@@ -3,6 +3,7 @@ package org.bsuir.dao.helper;
 import org.bsuir.connection.ConnectionPool;
 import org.bsuir.dao.types.LessonDao;
 import org.bsuir.dao.types.StudentDao;
+import org.bsuir.dao.types.SubjectDao;
 import org.bsuir.dao.types.TeacherDao;
 import org.bsuir.exceptions.dao.DaoException;
 
@@ -34,6 +35,10 @@ public class DaoManager implements AutoCloseable {
 
     public LessonDao getLessonDao(){
         return new LessonDao(connection);
+    }
+
+    public SubjectDao getSubjectDao() {
+        return new SubjectDao(connection);
     }
 
     @Override

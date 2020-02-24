@@ -2,7 +2,7 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Lessos</title>
     <%--@elvariable id="foundLesson" type="org.bsuir.dto.Lesson"--%>
     <c:set var="foundLesson" value="${pageContent.attributes.get('foundLesson')}"/>
 </head>
@@ -50,12 +50,12 @@
             <th>subject</th>
         </tr>
             <%--@elvariable id="lesson" type="org.bsuir.dto.Lesson--%>
-        <c:forEach var="lesson" items="${pageContent.tableContent}">
+        <c:forEach var="subject" items="${pageContent.tableContent}">
             <tr>
-                <td>${lesson.id}</td>
-                <td>${lesson.teacherId}</td>
-                <td>${lesson.groupId}</td>
-                <td>${lesson.subjectId}</td>
+                <td>${subject.id}</td>
+                <td>${subject.teacherId}</td>
+                <td>${subject.groupId}</td>
+                <td>${subject.subjectId}</td>
             </tr>
         </c:forEach>
     </table>

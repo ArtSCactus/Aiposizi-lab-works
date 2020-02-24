@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Subject {
     private Long id;
     private String name;
-    private String hours;
+    private Integer hours;
 
-    public Subject(Long id, String name, String hours) {
+    public Subject(Long id, String name, Integer hours) {
         this.id = id;
         this.name = name;
         this.hours = hours;
@@ -29,11 +29,11 @@ public class Subject {
         this.name = name;
     }
 
-    public String getHours() {
+    public Integer getHours() {
         return hours;
     }
 
-    public void setHours(String hours) {
+    public void setHours(Integer hours) {
         this.hours = hours;
     }
 

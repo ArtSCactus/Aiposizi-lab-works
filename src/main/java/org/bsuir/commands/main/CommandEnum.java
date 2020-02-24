@@ -44,39 +44,64 @@ public enum CommandEnum {
             this.command = new DeleteTeacher();
         }
     },
-    GET_TEACHER{
+    GET_TEACHER {
         {
             this.command = new FindTeacher();
         }
     },
-    ADD_TEACHER{
+    ADD_TEACHER {
         {
             this.command = new AddTeacher();
         }
     },
-    SHOW_LESSONS{
+    SHOW_LESSONS {
         {
             this.command = new ShowLessonsCommand();
         }
     },
-    ADD_LESSON{
+    ADD_LESSON {
         {
             this.command = new AddLesson();
         }
     },
-    DELETE_LESSON{
+    DELETE_LESSON {
         {
             this.command = new DeleteLesson();
         }
     },
-    GET_LESSON{
+    GET_LESSON {
         {
             this.command = new FindLesson();
         }
     },
-    UPDATE_LESSON{
+    UPDATE_LESSON {
         {
             this.command = new UpdateLesson();
+        }
+    },
+    SHOW_SUBJECTS{
+        {
+            this.command = new ShowSubjectsCommand();
+        }
+    },
+    ADD_SUBJECT {
+        {
+            this.command = new AddSubject();
+        }
+    },
+    GET_SUBJECT {
+        {
+            this.command = new FindSubject();
+        }
+    },
+    UPDATE_SUBJECT {
+        {
+            this.command = new UpdateSubject();
+        }
+    },
+    DELETE_SUBJECT {
+        {
+            this.command = new DeleteSubject();
         }
     };
     Command command;
