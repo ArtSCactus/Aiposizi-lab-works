@@ -31,7 +31,7 @@
         <h3>No lesson found</h3>
     </c:when>
     <c:otherwise>
-        <form class="edit-from" method="POST" action="controller">
+        <form id="edit-lessons-form" class="edit-from" method="POST" action="controller">
             <input type="hidden" name="command" value="update_lesson">
             <input type="hidden" name="id" value="${foundLesson.id}">
             <input type="text" name="teacherId" placeholder="Teacher id..." value="${foundLesson.teacherId}">

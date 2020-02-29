@@ -7,18 +7,18 @@
     <c:set var="foundTeacher" value="${pageContent.attributes.get('foundTeacher')}"/>
 </head>
 <body>
-<form method="POST" action="controller">
+<form id="add-teacher-from" class="add-form" method="POST" action="controller">
     <input type="text" name="name" placeholder="Name..." required="required">
     <input type="text" name="surname" placeholder="Surname..." required="required">
     <input type="hidden" name="command" value="add_teacher">
     <input type="submit" value="submit">
 </form>
-<form method="POST" action="controller">
+<form id="delete-teacher-form" class="delete-form" method="POST" action="controller">
     <input type="text" name="id" placeholder="Id..." required="required">
     <input type="hidden" name="command" value="delete_teacher">
     <input type="submit" value="delete">
 </form>
-<form class="find-by-id-form" method="get" action="controller">
+<form id="find-subject-form" class="find-form" method="get" action="controller">
     <input type="text" name="id" placeholder="Id..." required="required">
     <input type="hidden" name="command" value="get_teacher">
     <input class="find-btn" type="submit" value="find">
@@ -28,7 +28,7 @@
         <h3>No teacher found</h3>
     </c:when>
     <c:otherwise>
-        <form class="edit-from" method="POST" action="controller">
+        <form id="edit-teacher-form" class="edit-from" method="POST" action="controller">
             <input type="hidden" name="command" value="update_teacher">
             <input type="hidden" name="id" value="${foundTeacher.id}">
             <input type="text" name="name" placeholder="Name..." value="${foundTeacher.name}">

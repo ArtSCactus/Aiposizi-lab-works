@@ -17,9 +17,10 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    processRequest(req, resp);
+        processRequest(req, resp);
     }
 
     @Override
@@ -29,6 +30,14 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws ServletException, IOException {
+        LOGGER.error("Request URL: " + request.getRequestURL()
+                + "\nRequest URI: " + request.getRequestURI()
+                + "\nProtocol: " + request.getProtocol()
+                + "\nMethod: " + request.getMethod()
+                + "\nLocal addr: " + request.getLocalAddr()
+                + "\nRemote addr: " + request.getRemoteAddr()
+                + "\nRemote host: " + request.getRemoteHost()
+                + "\nContext path: " + request.getContextPath());
         CommandResult commandResult;
         CommandFactory client = new CommandFactory();
         Command command = client.defineCommand(request);

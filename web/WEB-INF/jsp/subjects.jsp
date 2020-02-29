@@ -29,7 +29,7 @@
         <h3>No subject found</h3>
     </c:when>
     <c:otherwise>
-        <form class="edit-from" method="POST" action="controller">
+        <form id="edit-subject-form" class="edit-from" method="POST" action="controller">
             <input type="hidden" name="command" value="update_subject">
             <input type="hidden" name="id" value="${foundSubject.id}">
             <input type="text" name="name" placeholder="Name..." value="${foundSubject.name}">
