@@ -4,7 +4,9 @@ import org.bsuir.commands.main.Command;
 import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.commands.result.PageContent;
+import org.bsuir.dto.Group;
 import org.bsuir.dto.Student;
+import org.bsuir.service.GroupService;
 import org.bsuir.service.StudentService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,9 @@ public class ShowStudentsCommand implements Command {
         StudentService service = new StudentService();
         List<Student> studentList = service.getAllStudents();
         PageContent content = new PageContent(studentList);
+        GroupService groupService = new GroupService();
+        List<Group> groups = groupService.getAllGroups();
+        content.setAttribute("groups", groups);
         request.setAttribute("PageContent", content);
         return new CommandResult(REDIRECT_URL, CommandType.GET);
     }

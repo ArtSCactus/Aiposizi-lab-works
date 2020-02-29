@@ -26,6 +26,7 @@ public class FindStudent implements Command {
         Optional<Student> studentOptional= service.getById(id);
         PageContent content = new PageContent();
         content.setTableContent(students);
+
         if(studentOptional.isPresent()){
             Student student = studentOptional.get();
             content.setAttribute("foundStudent", student);

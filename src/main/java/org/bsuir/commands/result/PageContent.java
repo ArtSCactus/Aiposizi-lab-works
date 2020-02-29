@@ -8,6 +8,7 @@ public class PageContent {
 
     public PageContent(List<?> tableContent) {
         this.tableContent = tableContent;
+        attributes = new HashMap<>();
     }
 
     public PageContent() {

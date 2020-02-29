@@ -13,7 +13,13 @@
     <input type="text" name="name" placeholder="Name..." required="required">
     <input type="text" name="surname" placeholder="Surname..." required="required">
     <input type="text" name="rating" placeholder="Rating..." required="required">
-    <input type="text" name="groupId" placeholder="Group id..." required="required">
+    <select>
+        <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+        <c:forEach var="group" items="${requestScope.PageContent.attributes.get('groups')}">
+            <option>${group.id}</option>
+        </c:forEach>
+    </select>
+    <%--<input type="text" name="groupId" placeholder="Group id..." required="required">--%>
     <input type="hidden" name="command" value="add_student">
     <input type="submit" value="submit">
 </form>

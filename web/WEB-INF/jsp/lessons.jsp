@@ -2,15 +2,27 @@
 <%@ include file="header.jsp" %>
 <html>
 <head>
-    <title>Lessos</title>
+    <title>Lessons</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--@elvariable id="foundLesson" type="org.bsuir.dto.Lesson"--%>
     <c:set var="foundLesson" value="${pageContent.attributes.get('foundLesson')}"/>
 </head>
 <body>
 <form id="add-lesson-form" class="add-form" method="POST" action="controller">
-    <input type="text" name="teacherId" placeholder="Teacher id..." required="required">
-    <input type="text" name="groupId" placeholder="Group id..." required="required">
+    <select>
+        <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
+        <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
+            <option>${teacher.id}</option>
+        </c:forEach>
+    </select>
+    <%--<input type="text" name="teacherId" placeholder="Teacher id..." required="required">--%>
+    <select>
+        <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+        <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
+            <option>${group.id}</option>
+        </c:forEach>
+    </select>
+    <%--<input type="text" name="groupId" placeholder="Group id..." required="required">--%>
     <input type="text" name="subjectId" placeholder="Subject id..." required>
     <input type="hidden" name="command" value="add_lesson">
     <input type="submit" value="submit">
@@ -35,8 +47,18 @@
         <form id="edit-lessons-form" class="edit-from" method="POST" action="controller">
             <input type="hidden" name="command" value="update_lesson">
             <input type="hidden" name="id" value="${foundLesson.id}">
-            <input type="text" name="teacherId" placeholder="Teacher id..." value="${foundLesson.teacherId}">
-            <input type="text" name="groupId" placeholder="Group id..." value="${foundLesson.groupId}">
+            <select>
+                    <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
+                <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
+                    <option>${teacher.id}</option>
+                </c:forEach>
+            </select>
+            <select>
+                    <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+                <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
+                    <option>${group.id}</option>
+                </c:forEach>
+            </select>
             <input type="text" name="subjectId" placeholder="Subject id..." value="${foundLesson.subjectId}">
             <input type="submit" value="edit">
         </form>

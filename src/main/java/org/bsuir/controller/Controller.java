@@ -30,7 +30,7 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws ServletException, IOException {
-        LOGGER.error("Request URL: " + request.getRequestURL()
+        LOGGER.info("Request URL: " + request.getRequestURL()
                 + "\nRequest URI: " + request.getRequestURI()
                 + "\nProtocol: " + request.getProtocol()
                 + "\nMethod: " + request.getMethod()
