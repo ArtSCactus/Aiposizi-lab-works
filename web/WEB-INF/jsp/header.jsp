@@ -3,6 +3,7 @@
 <html>
 <head>
     <c:set var="pageContent" value="${requestScope.PageContent}"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 <a href="controller?command=show_teachers">Teachers</a>

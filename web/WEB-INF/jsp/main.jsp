@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Students</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--@elvariable id="foundStudent" type="org.bsuir.dto.Student"--%>
     <c:set var="foundStudent" value="${pageContent.attributes.get('foundStudent')}"/>
 </head>

@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Teachers</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--@elvariable id="foundTeacher" type="org.bsuir.dto.Teacher"--%>
     <c:set var="foundTeacher" value="${pageContent.attributes.get('foundTeacher')}"/>
 </head>
