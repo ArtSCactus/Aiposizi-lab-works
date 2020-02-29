@@ -6,3 +6,4 @@
 /out/
 /config/
 
+src/main/resources/config/connection pool.properties
