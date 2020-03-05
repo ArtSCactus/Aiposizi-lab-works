@@ -1,9 +1,9 @@
 .DS_Store
 
-/target/
-/META-INF/
-/.idea/
-/out/
-/config/
+target/
+META-INF/
+.idea/
+out/
+config/
 
 src/main/resources/config/connection pool.properties
