@@ -5,5 +5,4 @@ META-INF/
 .idea/
 out/
 config/
-
-src/main/resources/config/connection pool.properties
+Servlet/src/main/resources/config/connection pool.properties
