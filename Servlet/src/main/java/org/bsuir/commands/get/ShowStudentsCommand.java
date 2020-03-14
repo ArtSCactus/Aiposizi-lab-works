@@ -8,6 +8,8 @@ import org.bsuir.dto.Group;
 import org.bsuir.dto.Student;
 import org.bsuir.service.GroupService;
 import org.bsuir.service.StudentService;
+import org.bsuir.service.rest.GroupRestService;
+import org.bsuir.service.rest.StudentRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,10 +19,10 @@ public class ShowStudentsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request) {
-        StudentService service = new StudentService();
+        StudentService service = new StudentRestService();
         List<Student> studentList = service.getAllStudents();
         PageContent content = new PageContent(studentList);
-        GroupService groupService = new GroupService();
+        GroupService groupService = new GroupRestService();
         List<Group> groups = groupService.getAllGroups();
         content.setAttribute("groups", groups);
         request.setAttribute("PageContent", content);

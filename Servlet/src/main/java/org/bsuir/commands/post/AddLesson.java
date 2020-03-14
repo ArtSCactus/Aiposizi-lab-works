@@ -5,6 +5,7 @@ import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.dto.Lesson;
 import org.bsuir.service.LessonService;
+import org.bsuir.service.rest.LessonRestService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +24,7 @@ public class AddLesson implements Command {
         Long teacherId = Long.parseLong(request.getParameter(TEACHER_ID_PARAM));
         Long groupId = Long.parseLong(request.getParameter(GROUP_ID_PARAM));
         Long subjectId = Long.parseLong(request.getParameter(SUBJECT_ID_PARAM));
-        LessonService service = new LessonService();
+        LessonService service = new LessonRestService();
         service.update(new Lesson(null, groupId, subjectId, teacherId));
         return new CommandResult(REDIRECT_URL, CommandType.POST);
     }

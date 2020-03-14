@@ -1,5 +1,6 @@
 package org.bsuir.service;
 
+import org.bsuir.dao.common.Dao;
 import org.bsuir.dao.common.DaoFactory;
 import org.bsuir.dao.helper.DaoManager;
 import org.bsuir.dao.types.GroupDao;
@@ -14,7 +15,7 @@ import java.util.List;
 public class GroupService {
 public List<Group> getAllGroups(){
     try(DaoManager dao = DaoFactory.createDaoManager()){
-        GroupDao groupDao = dao.getGroupDao();
+        Dao<Group> groupDao = dao.getGroupDao();
        return groupDao.getAll();
     }
 }

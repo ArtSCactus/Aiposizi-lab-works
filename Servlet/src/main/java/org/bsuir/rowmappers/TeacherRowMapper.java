@@ -25,13 +25,16 @@ public class TeacherRowMapper implements RowMapper<Teacher> {
             throw new RowMapperException(e);
         }
     }
+
     @Override
     public Type getJsonMeta() {
-       return new TypeToken<Teacher>(){}.getType();
+        return new TypeToken<Teacher>() {
+        }.getType();
     }
 
-   // @Override
+    // @Override
     public Type getJsonListMeta() {
-        return new TypeToken<List<Teacher>>(){}.getType();
+        return new TypeToken<List<Teacher>>() {
+        }.getType();
     }
 }

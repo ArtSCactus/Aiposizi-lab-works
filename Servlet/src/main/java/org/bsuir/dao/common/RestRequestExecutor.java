@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @author ArtSCactus
  * @version 1.0
  */
-public class RestRequestExecutor<T> {
+public abstract class RestRequestExecutor<T> {
     protected List<T> executeGet(String uri, RowMapper<T> rowMapper) {
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpGet getRequest = new HttpGet(uri);

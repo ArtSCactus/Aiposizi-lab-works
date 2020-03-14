@@ -10,6 +10,7 @@ import org.bsuir.dto.Teacher;
 import org.bsuir.service.GroupService;
 import org.bsuir.service.LessonService;
 import org.bsuir.service.TeacherService;
+import org.bsuir.service.rest.LessonRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,7 +25,7 @@ public class FindLesson implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        LessonService service = new LessonService();
+        LessonService service = new LessonRestService();
         List<Lesson> lessonList = service.getAllLessons();
         PageContent content = new PageContent();
         content.setTableContent(lessonList);

@@ -7,6 +7,7 @@ import org.bsuir.dto.Lesson;
 import org.bsuir.dto.Subject;
 import org.bsuir.service.LessonService;
 import org.bsuir.service.SubjectService;
+import org.bsuir.service.rest.SubjectRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class UpdateSubject implements Command {
         Long id = Long.parseLong(request.getParameter(ID));
         String name = request.getParameter(NAME);
         Integer hours = Integer.parseInt(request.getParameter(HOURS));
-        SubjectService service = new SubjectService();
+        SubjectService service = new SubjectRestService();
         Optional<Subject> subjectOptional = service.getById(id);
         if (subjectOptional.isPresent()){
             Subject subject = subjectOptional.get();

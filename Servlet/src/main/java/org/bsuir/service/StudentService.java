@@ -1,5 +1,6 @@
 package org.bsuir.service;
 
+import org.bsuir.dao.common.Dao;
 import org.bsuir.dao.common.DaoFactory;
 import org.bsuir.dao.helper.DaoManager;
 import org.bsuir.dao.types.StudentDao;
@@ -18,21 +19,21 @@ public class StudentService {
 
     public void update(Student item){
         try(DaoManager dao = DaoFactory.createDaoManager()){
-            StudentDao studentDao = dao.getStudentDao();
+            Dao<Student> studentDao = dao.getStudentDao();
             studentDao.save(item);
         }
     }
 
     public void delete(Long id){
         try(DaoManager dao = DaoFactory.createDaoManager()){
-            StudentDao studentDao = dao.getStudentDao();
+            Dao<Student> studentDao = dao.getStudentDao();
             studentDao.removeById(id);
         }
     }
 
     public Optional<Student> getById(Long id){
         try(DaoManager dao = DaoFactory.createDaoManager()){
-            StudentDao studentDao = dao.getStudentDao();
+            Dao<Student> studentDao = dao.getStudentDao();
             return studentDao.getById(id);
         }
     }

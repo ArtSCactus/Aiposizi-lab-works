@@ -6,6 +6,7 @@ import org.bsuir.commands.result.CommandType;
 import org.bsuir.commands.result.PageContent;
 import org.bsuir.dto.Subject;
 import org.bsuir.service.SubjectService;
+import org.bsuir.service.rest.SubjectRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FindSubject implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        SubjectService service = new SubjectService();
+        SubjectService service = new SubjectRestService();
         List<Subject> subjectList = service.getAll();
         PageContent content = new PageContent();
         content.setTableContent(subjectList);

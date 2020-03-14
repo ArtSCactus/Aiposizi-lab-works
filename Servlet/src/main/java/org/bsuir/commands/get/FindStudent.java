@@ -6,6 +6,7 @@ import org.bsuir.commands.result.CommandType;
 import org.bsuir.commands.result.PageContent;
 import org.bsuir.dto.Student;
 import org.bsuir.service.StudentService;
+import org.bsuir.service.rest.StudentRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,7 +22,7 @@ public class FindStudent implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter(ID_PARAM));
-        StudentService service = new StudentService();
+        StudentService service = new StudentRestService();
         List<Student> students = service.getAllStudents();
         Optional<Student> studentOptional= service.getById(id);
         PageContent content = new PageContent();

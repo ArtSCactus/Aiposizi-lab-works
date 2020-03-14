@@ -1,8 +1,11 @@
 package org.bsuir.rowmappers;
 
+import com.google.gson.reflect.TypeToken;
 import org.bsuir.dto.Group;
+import org.bsuir.dto.Teacher;
 import org.bsuir.exceptions.rowmapper.RowMapperException;
 
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,7 +26,7 @@ public class GroupRowMapper implements RowMapper<Group> {
    }
 
     @Override
-    public Class<Group> getJsonMeta() {
-        return null;
+    public Type getJsonMeta() {
+        return new TypeToken<Group>(){}.getType();
     }
 }

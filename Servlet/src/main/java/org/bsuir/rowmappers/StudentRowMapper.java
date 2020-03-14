@@ -1,8 +1,11 @@
 package org.bsuir.rowmappers;
 
+import com.google.gson.reflect.TypeToken;
 import org.bsuir.dto.Student;
+import org.bsuir.dto.Teacher;
 import org.bsuir.exceptions.rowmapper.RowMapperException;
 
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,7 +29,7 @@ public class StudentRowMapper implements RowMapper<Student> {
     }
 
     @Override
-    public Class<Student> getJsonMeta() {
-        return null;
+    public Type getJsonMeta() {
+        return new TypeToken<Student>(){}.getType();
     }
 }

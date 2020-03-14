@@ -5,6 +5,7 @@ import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.dto.Student;
 import org.bsuir.service.StudentService;
+import org.bsuir.service.rest.StudentRestService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +29,7 @@ public class AddStudent implements Command {
         String groupIdStr = request.getParameter(GROUP_ID);
         Long ratingLong = Long.parseLong(ratingStr);
         Long groupIdLong = Long.parseLong(groupIdStr);
-        StudentService service = new StudentService();
+        StudentService service = new StudentRestService();
         Student student = new Student(null, name, surname, ratingLong, groupIdLong);
         service.update(student);
         return new CommandResult(REDIRECT_URL, CommandType.POST);

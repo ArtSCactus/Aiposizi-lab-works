@@ -4,6 +4,7 @@ import org.bsuir.commands.main.Command;
 import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.service.StudentService;
+import org.bsuir.service.rest.StudentRestService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,7 @@ public class DeleteStudent implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter(ID_PARAM));
-        StudentService service = new StudentService();
+        StudentService service = new StudentRestService();
         service.delete(id);
         return new CommandResult(REDIRECT_URL, CommandType.POST);
     }

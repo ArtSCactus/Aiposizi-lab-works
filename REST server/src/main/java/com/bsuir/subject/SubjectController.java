@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.bsuir.subject;
 
+import com.bsuir.teacher.TeacherController;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,55 +13,62 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * @author ArtSCactus
+ * @version 1.0
+ */
 @RestController
-@RequestMapping(path = "/teachers")
-public class MainController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+@RequestMapping("/subjects")
+public class SubjectController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
     @Autowired
-    private TeacherRepository teacherRepository;
+    private SubjectRepository subjectRepository;
 
-    @DeleteMapping(path="/{id}")
-    public @ResponseBody HttpStatus deleteTeacher(@RequestParam Long id){
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody
+    HttpStatus deleteLesson(@PathVariable Long id) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        teacherRepository.deleteById(id);
+        Optional<Subject> targetObj = subjectRepository.findById(id);
+        if (!targetObj.isPresent()){
+            return HttpStatus.NOT_FOUND;
+        }
+        subjectRepository.deleteById(id);
         return HttpStatus.OK;
     }
 
     @PutMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addTeacher(@RequestBody String jsonObj) {
+    HttpStatus addLesson(@RequestBody String jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         Gson gson = new Gson();
-        Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
-        teacherRepository.save(teacher);
+        Subject student = gson.fromJson(jsonObj, Subject.class);
+        subjectRepository.save(student);
         return HttpStatus.CREATED;
     }
 
     @PostMapping(path = "/update")
     public @ResponseBody
-    HttpStatus updateTeacher(@RequestBody String jsonObj) {
+    HttpStatus updateLesson(@RequestBody String jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         Gson gson = new Gson();
-        Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
-        teacherRepository.save(teacher);
+        Subject subject = gson.fromJson(jsonObj, Subject.class);
+        subjectRepository.save(subject);
         return HttpStatus.OK;
     }
 
     @PostMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addNewUser(@RequestParam String name
-            , @RequestParam String surname) {
-        Teacher n = new Teacher();
-        n.setName(name);
-        n.setSurname(surname);
+    HttpStatus addNewStudent(@RequestParam Long id
+            , @RequestParam String name, @RequestParam Integer hours){
+        Subject n = new Subject(id, name, hours);
         try {
-            teacherRepository.save(n);
+            subjectRepository.save(n);
         } catch (RuntimeException e) {
             LOGGER.error(e.getCause().getMessage());
             return HttpStatus.INTERNAL_SERVER_ERROR;
@@ -70,22 +78,21 @@ public class MainController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<Teacher> getAllUsers() {
-        // This returns a JSON or XML with the users
+    Iterable<Subject> getAllStudents() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        return teacherRepository.findAll();
+        return subjectRepository.findAll();
     }
 
     @GetMapping(path = "/{id}")
     public @ResponseBody
-    Teacher getById(@PathVariable Long id) {
+    Subject getById(@PathVariable Long id) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Optional<Teacher> teacherOptional = teacherRepository.findById(id);
-        return teacherOptional.orElse(null);
+        Optional<Subject> groupOptional = subjectRepository.findById(id);
+        return groupOptional.orElse(null);
     }
 
     private void logRequest(HttpServletRequest request) {

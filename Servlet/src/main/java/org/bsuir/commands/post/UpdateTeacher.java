@@ -5,6 +5,7 @@ import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.dto.Teacher;
 import org.bsuir.service.TeacherService;
+import org.bsuir.service.rest.TeacherRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class UpdateTeacher implements Command {
         Long id = Long.parseLong(request.getParameter("id"));
         String newName = request.getParameter("name");
         String newSurname = request.getParameter("surname");
-        TeacherService service = new TeacherService();
+        TeacherService service = new TeacherRestService();
         Optional<Teacher> teacherOptional = service.getById(id);
         if (teacherOptional.isPresent()){
             Teacher teacher = teacherOptional.get();

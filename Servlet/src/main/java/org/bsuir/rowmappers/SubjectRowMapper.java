@@ -26,6 +26,6 @@ public class SubjectRowMapper implements RowMapper<Subject> {
 
     @Override
     public Type getJsonMeta() {
-        return new TypeToken<Teacher>(){}.getType();
+        return new TypeToken<Subject>(){}.getType();
     }
 }

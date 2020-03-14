@@ -9,21 +9,33 @@
 </head>
 <body>
 <form id="add-lesson-form" class="add-form" method="POST" action="controller">
-    <select>
-        <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
-        <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
-            <option>${teacher.id}</option>
-        </c:forEach>
-    </select>
-    <%--<input type="text" name="teacherId" placeholder="Teacher id..." required="required">--%>
-    <select>
-        <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
-        <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
-            <option>${group.id}</option>
-        </c:forEach>
-    </select>
-    <%--<input type="text" name="groupId" placeholder="Group id..." required="required">--%>
-    <input type="text" name="subjectId" placeholder="Subject id..." required>
+    <label for="teacher-id-select">
+        Teacher id:
+        <select id="teacher-id-select" name="teacherId">
+            <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
+            <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
+                <option>${teacher.id}</option>
+            </c:forEach>
+        </select>
+    </label>
+    <label for="group-id-select">
+        Group id:
+        <select id="group-id-select" name="groupId">
+            <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+            <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
+                <option>${group.id}</option>
+            </c:forEach>
+        </select>
+    </label>
+    <label for="subject-id-select">
+        Subject id:
+        <select id="subject-id-select" name="groupId">
+            <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+            <c:forEach var="group" items="${pageContent.attributes.get('subjects')}">
+                <option>${group.id}</option>
+            </c:forEach>
+        </select>
+    </label>
     <input type="hidden" name="command" value="add_lesson">
     <input type="submit" value="submit">
 </form>

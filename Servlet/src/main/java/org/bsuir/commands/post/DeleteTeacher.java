@@ -4,6 +4,7 @@ import org.bsuir.commands.main.Command;
 import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.service.TeacherService;
+import org.bsuir.service.rest.TeacherRestService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +17,7 @@ public class DeleteTeacher implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        TeacherService service = new TeacherService();
+        TeacherService service = new TeacherRestService();
         service.removeById(id);
         return new CommandResult(REDIRECTION_URL, CommandType.POST);
     }

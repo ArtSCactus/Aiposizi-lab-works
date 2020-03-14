@@ -8,6 +8,7 @@ import org.bsuir.dto.Lesson;
 import org.bsuir.dto.Subject;
 import org.bsuir.service.LessonService;
 import org.bsuir.service.SubjectService;
+import org.bsuir.service.rest.SubjectRestService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ShowSubjectsCommand implements Command {
     private static final String PAGE_PATH = "/WEB-INF/jsp/subjects.jsp";
     @Override
     public CommandResult execute(HttpServletRequest request) {
-        SubjectService service = new SubjectService();
+        SubjectService service = new SubjectRestService();
         List<Subject> subjects = service.getAll();
         PageContent content = new PageContent();
         content.setTableContent(subjects);

@@ -5,6 +5,7 @@ import org.bsuir.commands.result.CommandResult;
 import org.bsuir.commands.result.CommandType;
 import org.bsuir.dto.Student;
 import org.bsuir.service.StudentService;
+import org.bsuir.service.rest.StudentRestService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +24,7 @@ public class UpdateStudent implements Command {
         Long ratingLong = Long.parseLong(rating);
         Long groupLong = Long.parseLong(group);
         Long idLong = Long.parseLong(id);
-        StudentService service = new StudentService();
+        StudentService service = new StudentRestService();
         service.update(new Student(idLong, name, surname, ratingLong, groupLong));
         return new CommandResult("/controller?command=show_students", CommandType.POST);
     }

@@ -1,5 +1,6 @@
 package org.bsuir.service;
 
+import org.bsuir.dao.common.Dao;
 import org.bsuir.dao.common.DaoFactory;
 import org.bsuir.dao.helper.DaoManager;
 import org.bsuir.dao.types.LessonDao;
@@ -15,28 +16,28 @@ import java.util.Optional;
 public class LessonService {
     public List<Lesson> getAllLessons() {
         try (DaoManager dao = DaoFactory.createDaoManager()) {
-            LessonDao lessonDao = dao.getLessonDao();
+            Dao<Lesson> lessonDao = dao.getLessonDao();
             return lessonDao.getAll();
         }
     }
 
     public Optional<Lesson> getById(Long id) {
         try (DaoManager dao = DaoFactory.createDaoManager()) {
-            LessonDao lessonDao = dao.getLessonDao();
+            Dao<Lesson> lessonDao = dao.getLessonDao();
             return lessonDao.getById(id);
         }
     }
 
     public int update(Lesson lesson) {
         try (DaoManager dao = DaoFactory.createDaoManager()) {
-            LessonDao lessonDao = dao.getLessonDao();
+            Dao<Lesson> lessonDao = dao.getLessonDao();
             return lessonDao.save(lesson);
         }
     }
 
     public int removeById(Long id) {
         try (DaoManager dao = DaoFactory.createDaoManager()) {
-            LessonDao lessonDao = dao.getLessonDao();
+            Dao<Lesson> lessonDao = dao.getLessonDao();
             return lessonDao.removeById(id);
         }
     }

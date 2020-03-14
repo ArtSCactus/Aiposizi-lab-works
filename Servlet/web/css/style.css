@@ -25,3 +25,7 @@ input{
     margin-top: 10px;
     text-decoration: none;
 }
+
+select{
+    width: 4%;
+}

@@ -1,4 +1,4 @@
-package org.bsuir.dao.types;
+package org.bsuir.dao.rest;
 
 import com.google.gson.Gson;
 import org.bsuir.dao.common.Dao;
@@ -16,10 +16,10 @@ import java.util.ResourceBundle;
  * @author ArtSCactus
  * @version 1.0
  */
-public class TeacherRESTDao extends RestRequestExecutor<Teacher> implements Dao<Teacher> {
+public class TeacherRestDao extends RestRequestExecutor<Teacher> implements Dao<Teacher> {
     private ResourceBundle uris;
 
-    public TeacherRESTDao() {
+    public TeacherRestDao() {
         uris = PropertyResourceBundle.getBundle("requests/REST url");
     }
 
