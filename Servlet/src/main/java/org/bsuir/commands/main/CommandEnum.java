@@ -103,6 +103,11 @@ public enum CommandEnum {
         {
             this.command = new DeleteSubject();
         }
+    },
+    SHOW_SINGLE_PAGE{
+        {
+            this.command = new ShowSinglePage();
+        }
     };
     Command command;
 

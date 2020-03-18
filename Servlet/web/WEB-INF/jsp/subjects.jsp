@@ -47,11 +47,11 @@
             <th>hours</th>
         </tr>
             <%--@elvariable id="subject" type="org.bsuir.dto.Subject--%>
-        <c:forEach var="subject" items="${pageContent.tableContent}">
+        <c:forEach var="lesson" items="${pageContent.tableContent}">
             <tr>
-                <td>${subject.id}</td>
-                <td>${subject.name}</td>
-                <td>${subject.hours}</td>
+                <td>${lesson.id}</td>
+                <td>${lesson.name}</td>
+                <td>${lesson.hours}</td>
             </tr>
         </c:forEach>
     </table>

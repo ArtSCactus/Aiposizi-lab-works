@@ -48,7 +48,7 @@ public class Controller extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + commandResult.getUrl());
                     break;
                 case GET:
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(commandResult.getUrl());
+                   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(commandResult.getUrl());
                     dispatcher.forward(request, response);
             }
         } catch (ServletException e) {

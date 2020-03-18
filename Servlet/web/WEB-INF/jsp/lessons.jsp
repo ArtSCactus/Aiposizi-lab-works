@@ -85,12 +85,12 @@
             <th>subject</th>
         </tr>
             <%--@elvariable id="lesson" type="org.bsuir.dto.Lesson--%>
-        <c:forEach var="subject" items="${pageContent.tableContent}">
+        <c:forEach var="lesson" items="${pageContent.tableContent}">
             <tr>
-                <td>${subject.id}</td>
-                <td>${subject.teacherId}</td>
-                <td>${subject.groupId}</td>
-                <td>${subject.subjectId}</td>
+                <td>${lesson.id}</td>
+                <td>${lesson.teacherId}</td>
+                <td>${lesson.groupId}</td>
+                <td>${lesson.subjectId}</td>
             </tr>
         </c:forEach>
     </table>
