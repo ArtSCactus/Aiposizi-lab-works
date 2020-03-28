@@ -5,9 +5,7 @@ import org.bsuir.dao.common.Dao;
 import org.bsuir.dao.common.RestRequestExecutor;
 import org.bsuir.dao.util.UriFormatter;
 import org.bsuir.dto.Group;
-import org.bsuir.dto.Subject;
 import org.bsuir.rowmappers.GroupRowMapper;
-import org.bsuir.rowmappers.SubjectRowMapper;
 
 import java.util.List;
 import java.util.Optional;

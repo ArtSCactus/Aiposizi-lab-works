@@ -79,7 +79,7 @@ public class StudentController {
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Student> getAllStudents() {
-        // This returns a JSON or XML with the users
+        // This returns a JSON or XML with the user
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);

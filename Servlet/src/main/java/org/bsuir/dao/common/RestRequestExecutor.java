@@ -86,12 +86,14 @@ public abstract class RestRequestExecutor<T> {
         }
     }
 
-    /**Sends delete request.
-     * @see RestRequestExecutor#executePost(String, String)
+    /**
+     * Sends delete request.
+     *
      * @param uri resource uri.
      * @return http status code.
+     * @see RestRequestExecutor#executePost(String, String)
      */
-    protected int executeDelete(String uri){
+    protected int executeDelete(String uri) {
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
             HttpDelete httpDelete = new HttpDelete(uri);
             httpDelete.setHeader("Accept", "application/json");

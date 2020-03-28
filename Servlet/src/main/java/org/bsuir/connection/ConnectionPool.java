@@ -1,10 +1,10 @@
 package org.bsuir.connection;
 
 import com.mysql.cj.jdbc.Driver;
-import org.bsuir.exceptions.connection.DriverManagerException;
-import org.bsuir.exceptions.files.ResourcesLoadingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bsuir.exceptions.connection.DriverManagerException;
+import org.bsuir.exceptions.files.ResourcesLoadingException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,8 +64,8 @@ public class ConnectionPool {
                 connection.setSchema(schema);
                 freeConnections.offer(connection);
             } catch (SQLException e) {
-                LOGGER.error("Failed to get org.bsuir.connection from DriverManager");
-                throw new DriverManagerException("Failed to get org.bsuir.connection from DriverManager: " + e.getMessage(), e);
+                LOGGER.error("Failed to get connection from DriverManager" + e.getMessage());
+                throw new DriverManagerException("Failed to get connection from DriverManager: " + e.getMessage(), e);
             }
         }
     }
@@ -87,10 +87,13 @@ public class ConnectionPool {
     }
 
     public void releaseConnection(Connection connection) {
-        LOCK.lock();
-        freeConnections.offer(connection);
-        busyConnections.remove(connection);
-        LOCK.unlock();
+        try {
+            LOCK.lock();
+            freeConnections.offer(connection);
+            busyConnections.remove(connection);
+        }finally{
+            LOCK.unlock();
+        }
     }
 
     public Connection getConnection() {
@@ -100,7 +103,23 @@ public class ConnectionPool {
             busyConnections.offer(connection);
             return connection;
         } catch (InterruptedException e) {
-            throw new RuntimeException("An error occurred while getting org.bsuir.connection from org.bsuir.connection pool", e);
+            throw new RuntimeException("An error occurred while getting connection from connection pool", e);
+        } finally {
+            LOCK.unlock();
+        }
+    }
+
+    public void terminate() {
+        LOCK.lock();
+        try {
+            for (Connection connection : freeConnections) {
+                ((ProxyConnection) connection).terminate();
+            }
+            for (Connection connection : busyConnections) {
+                ((ProxyConnection) connection).terminate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to terminate connections. Message: " + e.getMessage());
         } finally {
             LOCK.unlock();
         }

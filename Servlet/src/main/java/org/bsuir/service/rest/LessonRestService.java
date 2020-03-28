@@ -45,4 +45,5 @@ public class LessonRestService extends LessonService {
             return lessonDao.removeById(id);
         }
     }
+
 }

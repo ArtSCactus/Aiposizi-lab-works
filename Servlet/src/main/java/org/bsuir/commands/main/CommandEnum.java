@@ -104,9 +104,9 @@ public enum CommandEnum {
             this.command = new DeleteSubject();
         }
     },
-    SHOW_SINGLE_PAGE{
+    APP{
         {
-            this.command = new ShowSinglePage();
+            this.command = new GetAppCommand();
         }
     };
     Command command;

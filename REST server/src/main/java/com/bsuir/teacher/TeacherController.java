@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,18 +15,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/teachers")
+@Validated
 public class TeacherController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @DeleteMapping(path="/{id}")
-    public @ResponseBody HttpStatus deleteTeacher(@PathVariable Long id){
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody
+    HttpStatus deleteTeacher(@PathVariable Long id) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         Optional<Teacher> targetObj = teacherRepository.findById(id);
-        if (!targetObj.isPresent()){
+        if (!targetObj.isPresent()) {
             return HttpStatus.NOT_FOUND;
         }
         teacherRepository.deleteById(id);
@@ -75,7 +78,7 @@ public class TeacherController {
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Teacher> getAllUsers() {
-        // This returns a JSON or XML with the users
+        // This returns a JSON or XML with the user
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);

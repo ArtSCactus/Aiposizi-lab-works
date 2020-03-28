@@ -3,6 +3,7 @@ package org.bsuir.service.rest;
 import org.bsuir.dao.common.Dao;
 import org.bsuir.dao.common.DaoFactory;
 import org.bsuir.dao.helper.DaoManager;
+import org.bsuir.dao.rest.TeacherRestDao;
 import org.bsuir.dto.Teacher;
 import org.bsuir.service.TeacherService;
 

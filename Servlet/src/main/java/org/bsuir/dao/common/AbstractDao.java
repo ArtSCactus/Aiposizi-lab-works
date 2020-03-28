@@ -19,21 +19,21 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     protected List<T> executeQuery(String sql, RowMapper<T> rowMapper, Object... params) throws DaoException {
         try (PreparedStatement statement = prepareStatement(sql, params)) {
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    List<T> objects = new ArrayList<>();
-                    while (resultSet.next()) {
-                        objects.add(rowMapper.map(resultSet));
-                    }
-                    return objects;
+            try (ResultSet resultSet = statement.executeQuery()) {
+                List<T> objects = new ArrayList<>();
+                while (resultSet.next()) {
+                    objects.add(rowMapper.map(resultSet));
                 }
+                return objects;
+            }
         } catch (SQLException e) {
             throw new DaoException("An error occurred while request executing", e);
         }
     }
 
-    protected int executeUpdate(String sql, Object... params){
+    protected int executeUpdate(String sql, Object... params) {
         try (PreparedStatement statement = prepareStatement(sql, params)) {
-           return statement.executeUpdate();
+            return statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("An error occurred while request executing", e);
         }
@@ -51,5 +51,4 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
         return statement;
     }
-
 }
