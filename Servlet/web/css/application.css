@@ -1,3 +1,6 @@
 #students-page, #subjects-page, #lessons-page{
     display: none;
 }
+#edit-teacher-form{
+    display: none;
+}

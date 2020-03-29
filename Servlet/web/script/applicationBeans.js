@@ -1,4 +1,7 @@
 class TeacherBean {
+    id;
+    name;
+    surname;
 
     constructor(id, name, surname) {
         this.id = id;
@@ -7,27 +10,27 @@ class TeacherBean {
     }
 
 
-    get _id() {
+    get id() {
         return this.id;
     }
 
-    set _id(value) {
+    set id(value) {
         this.id = value;
     }
 
-    get _name() {
+    get name() {
         return this.name;
     }
 
-    set _name(value) {
+    set name(value) {
         this.name = value;
     }
 
-    get _surname() {
+    get surname() {
         return this.surname;
     }
 
-    set _surname(value) {
+    set surname(value) {
         this.surname = value;
     }
 
@@ -37,7 +40,14 @@ class TeacherBean {
      * @returns TeacherBean
      */
     static from(json) {
-        return Object.assign(new TeacherBean(), json);
+        let parsedJson;
+        if ((typeof json) === "string"){
+          parsedJson  = JSON.parse(json);
+
+        } else {
+            parsedJson = json;
+        }
+        return new TeacherBean(parsedJson.id, parsedJson.name, parsedJson.surname);
     }
 
     /** Returns an array of TeacherBean objects from JSON array.
@@ -45,9 +55,9 @@ class TeacherBean {
      * @returns [TeacherBean]
      * */
     static fromArray(json) {
-        var teachersJSONArray = JSON.parse(json);
-        var objects = [];
-        for (var index = 0; index < teachersJSONArray.length; index++) {
+        let teachersJSONArray = JSON.parse(json);
+        let objects = [];
+        for (let index = 0; index < teachersJSONArray.length; index++) {
             console.log(teachersJSONArray[index]);
             objects.push(TeacherBean.from(teachersJSONArray[index]));
         }
@@ -56,6 +66,12 @@ class TeacherBean {
 }
 
 class StudentBean {
+    id;
+    name;
+    surname;
+    rating;
+    group;
+
     constructor(id, name, surname, rating, group) {
         this.id = id;
         this.name = name;
@@ -65,43 +81,43 @@ class StudentBean {
     }
 
 
-    get _id() {
+    get id() {
         return this.id;
     }
 
-    set _id(value) {
+    set id(value) {
         this.id = value;
     }
 
-    get _name() {
+    get name() {
         return this.name;
     }
 
-    set _name(value) {
+    set name(value) {
         this.name = value;
     }
 
-    get _surname() {
+    get surname() {
         return this.surname;
     }
 
-    set _surname(value) {
+    set surname(value) {
         this.surname = value;
     }
 
-    get _rating() {
+    get rating() {
         return this.rating;
     }
 
-    set _rating(value) {
+    set rating(value) {
         this.rating = value;
     }
 
-    get _group() {
+    get group() {
         return this.group;
     }
 
-    set _group(value) {
+    set group(value) {
         this.group = value;
     }
 
@@ -111,7 +127,14 @@ class StudentBean {
      * @returns StudentBean
      */
     static from(json) {
-        return Object.assign(new StudentBean(), json);
+        let parsedJson;
+        if ((typeof json) === "string"){
+            parsedJson  = JSON.parse(json);
+
+        } else {
+            parsedJson = json;
+        }
+        return new StudentBean(parsedJson.id, parsedJson.name, parsedJson.surname, parsedJson.rating, parsedJson.group);
     }
 
     /** Returns an array of StudentBean objects from JSON array.
@@ -119,9 +142,9 @@ class StudentBean {
      * @returns [StudentBean]
      * */
     static fromArray(json) {
-        var teachersJSONArray = JSON.parse(json);
-        var objects = [];
-        for (var index = 0; index < teachersJSONArray.length; index++) {
+        let teachersJSONArray = JSON.parse(json);
+        let objects = [];
+        for (let index = 0; index < teachersJSONArray.length; index++) {
             console.log(teachersJSONArray[index]);
             objects.push(StudentBean.from(teachersJSONArray[index]));
         }
@@ -130,6 +153,9 @@ class StudentBean {
 }
 
 class SubjectBean {
+    id;
+    name;
+    hours;
     constructor(id, name, hours) {
         this.id = id;
         this.name = name;
@@ -137,27 +163,27 @@ class SubjectBean {
     }
 
 
-    get _id() {
+    get id() {
         return this.id;
     }
 
-    set _id(value) {
+    set id(value) {
         this.id = value;
     }
 
-    get _name() {
+    get name() {
         return this.name;
     }
 
-    set _name(value) {
+    set name(value) {
         this.name = value;
     }
 
-    get _hours() {
+    get hours() {
         return this.hours;
     }
 
-    set _hours(value) {
+    set hours(value) {
         this.hours = value;
     }
 
@@ -167,7 +193,14 @@ class SubjectBean {
      * @returns SubjectBean
      */
     static from(json) {
-        return Object.assign(new SubjectBean(), json);
+        let parsedJson;
+        if ((typeof json) === "string"){
+            parsedJson  = JSON.parse(json);
+
+        } else {
+            parsedJson = json;
+        }
+        return new SubjectBean(parsedJson.id, parsedJson.name, parsedJson.hours);
     }
 
     /** Returns an array of SubjectBean objects from JSON array.
@@ -175,9 +208,9 @@ class SubjectBean {
      * @returns [SubjectBean]
      * */
     static fromArray(json) {
-        var teachersJSONArray = JSON.parse(json);
-        var objects = [];
-        for (var index = 0; index < teachersJSONArray.length; index++) {
+        let teachersJSONArray = JSON.parse(json);
+        let objects = [];
+        for (let index = 0; index < teachersJSONArray.length; index++) {
             console.log(teachersJSONArray[index]);
             objects.push(SubjectBean.from(teachersJSONArray[index]));
         }
@@ -186,10 +219,10 @@ class SubjectBean {
 }
 
 class LessonBean {
-    /*   private Long id;
-    private Long groupId;
-    private Long subjectId;
-    private Long teacherId;*/
+    id;
+    groupId;
+    subjectId;
+    teacherId;
     constructor(id, groupId, subjectId, teacherId) {
         this.id = id;
         this.groupId = groupId;
@@ -198,45 +231,52 @@ class LessonBean {
     }
 
 
-    get _id() {
+    get id() {
         return this.id;
     }
 
-    set _id(value) {
+    set id(value) {
         this.id = value;
     }
 
-    get _groupId() {
+    get groupId() {
         return this.groupId;
     }
 
-    set _groupId(value) {
+    set groupId(value) {
         this.groupId = value;
     }
 
-    get _subjectId() {
+    get subjectId() {
         return this.subjectId;
     }
 
-    set _subjectId(value) {
+    set subjectId(value) {
         this.subjectId = value;
     }
 
-    get _teacherId() {
+    get teacherId() {
         return this.teacherId;
     }
 
-    set _teacherId(value) {
+    set teacherId(value) {
         this.teacherId = value;
     }
 
     /** Returns a LessonBean object from non JSON.
      *
      * @param json
-     * @returns SubjectBean
+     * @returns LessonBean
      */
     static from(json) {
-        return Object.assign(new LessonBean(), json);
+        let parsedJson;
+        if ((typeof json) === "string"){
+            parsedJson  = JSON.parse(json);
+
+        } else {
+            parsedJson = json;
+        }
+        return new LessonBean(parsedJson.id, parsedJson.groupId, parsedJson.subjectId, parsedJson.teacherId);
     }
 
     /** Returns an array of LessonBean objects from JSON array.
@@ -244,9 +284,9 @@ class LessonBean {
      * @returns [SubjectBean]
      * */
     static fromArray(json) {
-        var teachersJSONArray = JSON.parse(json);
-        var objects = [];
-        for (var index = 0; index < teachersJSONArray.length; index++) {
+        let teachersJSONArray = JSON.parse(json);
+        let objects = [];
+        for (let index = 0; index < teachersJSONArray.length; index++) {
             console.log(teachersJSONArray[index]);
             objects.push(LessonBean.from(teachersJSONArray[index]));
         }

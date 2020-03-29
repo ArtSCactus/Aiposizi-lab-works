@@ -142,3 +142,39 @@ $(document).on("click", '#add-teacher-btn', function () {
     data.saveTeacher(bean);
     updateTeacherTable()
 });
+
+$(document).on("click", '#find-teacher-btn', function (event) {
+    event.preventDefault();
+let id = $('#find-teacher-id-input').val();
+let dataManager = new DataManager();
+let foundTeacher = dataManager.loadTeacherById(id);
+if (foundTeacher !== null){
+    $('#edit-teacher-id-input').val(foundTeacher.id);
+    $('#edit-teacher-name-input').val(foundTeacher.name);
+    $('#edit-teacher-surname-input').val(foundTeacher.surname);
+    $('#teacher-not-found-msg').hide();
+    $('#edit-teacher-form').show();
+} else {
+    $('#edit-teacher-form').hide();
+    $('#teacher-not-found-msg').show();
+}
+});
+
+$(document).on("click", '#edit-teacher-btn', function (event) {
+event.preventDefault();
+let dataManager = new DataManager();
+let obj = new TeacherBean($('#edit-teacher-id-input').val(),
+    $('#edit-teacher-name-input').val(),
+    $('#edit-teacher-surname-input').val());
+dataManager.saveTeacher(obj);
+updateTeacherTable();
+//TODO: Notification about success or fail
+});
+
+$(document).on("click", '#delete-teacher-btn', function (event) {
+event.preventDefault();
+    let dataManager = new DataManager();
+    dataManager.deleteTeacher($('#delete-teacher-id-input').val());
+    updateTeacherTable();
+    //TODO: Notification about success or fail
+});

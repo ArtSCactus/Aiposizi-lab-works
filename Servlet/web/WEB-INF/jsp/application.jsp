@@ -34,7 +34,7 @@
     </form>
    <%-- <c:choose>
         <c:when test="${empty foundSubject}">--%>
-            <h3>No subject found</h3>
+            <h3 id="subject-not-found-msg" class="not-found-msg">No subject found</h3>
        <%-- </c:when>
         <c:otherwise>--%>
             <form id="edit-subject-form" class="edit-from" method="POST" action="controller">
@@ -74,27 +74,24 @@
         <input id="teacher-surname-input-field" type="text" name="surname" placeholder="Surname..." required="required">
         <button id="add-teacher-btn">Add</button>
     <%--</form>--%>
-    <form id="delete-teacher-form" class="delete-form" method="POST" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="delete_teacher">
-        <input type="submit" value="delete">
+    <form id="delete-teacher-form" class="delete-form">
+        <input id="delete-teacher-id-input" type="text" placeholder="Id..." required="required">
+        <input id="delete-teacher-btn" type="submit" value="Delete">
     </form>
-    <form id="find-subject-form" class="find-form" method="get" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="get_teacher">
-        <input class="find-btn" type="submit" value="find">
+    <form id="find-teacher-form" class="find-form">
+        <input id="find-teacher-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="find-teacher-btn" class="find-btn" type="submit" value="find">
     </form>
     <%--<c:choose>
         <c:when test="${empty foundTeacher}">--%>
-            <h3>No teacher found</h3>
+            <h3 id="teacher-not-found-msg" class="not-found-msg">No teacher found</h3>
        <%-- </c:when>
         <c:otherwise>--%>
-            <form id="edit-teacher-form" class="edit-from" method="POST" action="controller">
-                <input type="hidden" name="command" value="update_teacher">
-                <input type="hidden" name="id" value="${foundTeacher.id}">
-                <input type="text" name="name" placeholder="Name..." value="${foundTeacher.name}">
-                <input type="text" name="surname" placeholder="Surname..." value="${foundTeacher.surname}">
-                <input type="submit" value="edit">
+            <form id="edit-teacher-form" class="edit-from">
+                <input id="edit-teacher-id-input" type="hidden" value="">
+                <input id="edit-teacher-name-input" type="text" value="" placeholder="Name...">
+                <input id="edit-teacher-surname-input" type="text" value="" placeholder="Surname...">
+                <input id="edit-teacher-btn" type="submit" value="Edit">
             </form>
         <%--</c:otherwise>
     </c:choose>--%>
@@ -166,7 +163,7 @@
         <c:when test="${pageContent.attributes.get('foundLesson') eq null}">
         </c:when>
         <c:when test="${empty pageContent.attributes.get('foundLesson')}">--%>
-            <h3>No lesson found</h3>
+            <h3 id="lesson-not-found-msg" clas="not-found-msg">No lesson found</h3>
        <%-- </c:when>
         <c:otherwise>--%>
             <form id="edit-lessons-form" class="edit-from" method="POST" action="controller">
@@ -242,7 +239,7 @@
         <c:when test="${empty foundStudent}">
         </c:when>
         <c:otherwise>--%>
-    <h3>No student found</h3>
+    <h3 id="student-not-found-msg" class="not-found-msg">No student found</h3>
     <form id="students-edit-form" class="edit-from" method="POST" action="controller">
                 <input type="hidden" name="command" value="update_student">
                 <input type="hidden" name="id" value="${foundStudent.id}">

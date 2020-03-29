@@ -19,7 +19,7 @@
     <input type="hidden" name="command" value="delete_teacher">
     <input type="submit" value="delete">
 </form>
-<form id="find-subject-form" class="find-form" method="get" action="controller">
+<form id="find-teacher-form" class="find-form" method="get" action="controller">
     <input type="text" name="id" placeholder="Id..." required="required">
     <input type="hidden" name="command" value="get_teacher">
     <input class="find-btn" type="submit" value="find">

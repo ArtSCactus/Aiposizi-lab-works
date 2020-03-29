@@ -17,6 +17,7 @@ public class CORSFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.addHeader("Access-Control-Allow-Origin", "http://localhost:8080");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, http://localhost:8080");
+        response.addHeader("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

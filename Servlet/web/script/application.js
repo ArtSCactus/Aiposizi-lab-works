@@ -49,7 +49,7 @@ class DataManager {
         this.allStudentsURL = 'http://localhost:8081/students/all';
         this.allLessonsURL = 'http://localhost:8081/lessons/all';
         this.allSubjectsURL = 'http://localhost:8081/subjects/all';
-        this.teacherByIdURL = 'http://localhost:8081/teacher/'; //+id required
+        this.teacherByIdURL = 'http://localhost:8081/teachers/'; //+id required
         this.subjectByIdURL = 'http://localhost:8081/subjects/'; //+id required
         this.lessonByIdURL = 'http://localhost:8081/lessons/'; //+id required
         this.studentByIdURL = 'http://localhost:8081/students/'; //+id required
@@ -119,20 +119,20 @@ class DataManager {
         return this.executePostToRest(this.updateSubjectURL, json);
     }
 
-    deleteTeacher(teacherBean) {
-        return this.executeDeleteToRest(this.teacherByIdURL + teacherBean.id);
+    deleteTeacher(id) {
+        return this.executeDeleteToRest(this.teacherByIdURL + id);
     }
 
-    deleteSubject(subjectBean) {
-        return this.executeDeleteToRest(this.subjectByIdURL + subjectBean.id);
+    deleteSubject(id) {
+        return this.executeDeleteToRest(this.subjectByIdURL + id);
     }
 
-    deleteLesson(lessonBean) {
-        return this.executeDeleteToRest(this.lessonByIdURL + lessonBean.id);
+    deleteLesson(id) {
+        return this.executeDeleteToRest(this.lessonByIdURL + id);
     }
 
-    deleteStudent(studentBean) {
-        return this.executeDeleteToRest(this.studentByIdURL + studentBean.id);
+    deleteStudent(id) {
+        return this.executeDeleteToRest(this.studentByIdURL + id);
     }
 
     //TODO: Rewrite on $.ajax
@@ -156,6 +156,7 @@ class DataManager {
 
         }
     }
+
     //TODO: Rewrite on $.ajax
     executePostToRest(url, json) {
         let xhr = new XMLHttpRequest();
@@ -164,6 +165,7 @@ class DataManager {
         xhr.send(json);
         return xhr.status;
     }
+
 //TODO: Rewrite on $.ajax
     executeDeleteToRest(url) {
         let xhr = new XMLHttpRequest();
