@@ -11,6 +11,7 @@ public class Student {
     private String name;
     private String surname;
     private Long rating;
+    @Column(name="students.group")
     private Long group;
 
     public Student(){

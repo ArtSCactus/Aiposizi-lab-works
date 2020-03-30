@@ -9,7 +9,7 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "group")
+    @Column(name = "lessons.group")
     private Long groupId;
     @Column(name = "subject")
     private Long subjectId;

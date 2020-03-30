@@ -16,36 +16,26 @@
 <button id="lesson-header-btn">Lessons</button>
 <button id="subject-header-btn">Subjects</button>
 <div id="subjects-page">
-    <form id="add-subject-form" class="add-form" method="POST" action="controller">
-        <input type="text" name="name" placeholder="Name..." required="required">
-        <input type="text" name="hours" placeholder="Hours..." required="required">
-        <input type="hidden" name="command" value="add_subject">
-        <input type="submit" value="submit">
+    <form id="subject-add-form" class="add-form">
+        <input id="subject-add-name-input" type="text" placeholder="Name..." required="required">
+        <input id="subject-add-hours-input" type="text" placeholder="Hours..." required="required">
+        <input id="subject-add-btn" type="submit" value="submit">
     </form>
-    <form id="delete-subject-form" class="delete-form" method="POST" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="delete_subject">
-        <input type="submit" value="delete">
+    <form id="subject-delete-form" class="delete-form">
+        <input id="subject-delete-id-input" type="text" placeholder="Id..." required="required">
+        <input id="subject-delete-btn" type="submit" value="delete">
     </form>
-    <form id="find-subject-form" class="find-form" method="get" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="get_subject">
-        <input class="find-btn" type="submit" value="find">
+    <form id="subject-find-form" class="find-form" method="get" action="controller">
+        <input id="subject-find-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="subject-find-btn" class="find-btn" type="submit" value="find">
     </form>
-   <%-- <c:choose>
-        <c:when test="${empty foundSubject}">--%>
             <h3 id="subject-not-found-msg" class="not-found-msg">No subject found</h3>
-       <%-- </c:when>
-        <c:otherwise>--%>
-            <form id="edit-subject-form" class="edit-from" method="POST" action="controller">
-                <input type="hidden" name="command" value="update_subject">
-                <input type="hidden" name="id" value="${foundSubject.id}">
-                <input type="text" name="name" placeholder="Name..." value="${foundSubject.name}">
-                <input type="text" name="hours" placeholder="Hours..." value="${foundSubject.hours}">
-                <input type="submit" value="edit">
+            <form id="subject-edit-form" class="edit-from">
+                <input id="subject-edit-id-input" type="hidden" name="id" value="">
+                <input id="subject-edit-name-input" type="text" name="name" placeholder="Name..." value="">
+                <input id="subject-edit-hours-input" type="text" name="hours" placeholder="Hours..." value="">
+                <input id="subject-edit-btn" type="submit" value="edit">
             </form>
-       <%-- </c:otherwise>
-    </c:choose>--%>
     <c:if test="${not empty pageContent.attributes.get('subjects')}">
         <table id="subjects-table">
             <thead>
@@ -57,11 +47,11 @@
             </thead>
             <tbody>
                 <%--@elvariable id="subject" type="org.bsuir.dto.Subject--%>
-            <c:forEach var="lesson" items="${pageContent.attributes.get('subjects')}">
+            <c:forEach var="subject" items="${pageContent.attributes.get('subjects')}">
                 <tr>
-                    <td>${lesson.id}</td>
-                    <td>${lesson.name}</td>
-                    <td>${lesson.hours}</td>
+                    <td>${subject.id}</td>
+                    <td>${subject.name}</td>
+                    <td>${subject.hours}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -69,11 +59,11 @@
     </c:if>
 </div>
 <div id="teachers-page">
-    <%--<form id="add-teacher-from" class="add-form" method="POST" action="controller">--%>
+    <form id="add-teacher-from" class="add-form" method="POST" action="controller">
         <input id="teacher-name-input-field" type="text" name="name" placeholder="Name..." required="required">
         <input id="teacher-surname-input-field" type="text" name="surname" placeholder="Surname..." required="required">
-        <button id="add-teacher-btn">Add</button>
-    <%--</form>--%>
+        <input id="add-teacher-btn" type="submit" value="Add">
+    </form>
     <form id="delete-teacher-form" class="delete-form">
         <input id="delete-teacher-id-input" type="text" placeholder="Id..." required="required">
         <input id="delete-teacher-btn" type="submit" value="Delete">
@@ -82,19 +72,13 @@
         <input id="find-teacher-id-input" type="text" name="id" placeholder="Id..." required="required">
         <input id="find-teacher-btn" class="find-btn" type="submit" value="find">
     </form>
-    <%--<c:choose>
-        <c:when test="${empty foundTeacher}">--%>
             <h3 id="teacher-not-found-msg" class="not-found-msg">No teacher found</h3>
-       <%-- </c:when>
-        <c:otherwise>--%>
-            <form id="edit-teacher-form" class="edit-from">
+            <form id="teacher-edit-form" class="edit-from">
                 <input id="edit-teacher-id-input" type="hidden" value="">
                 <input id="edit-teacher-name-input" type="text" value="" placeholder="Name...">
                 <input id="edit-teacher-surname-input" type="text" value="" placeholder="Surname...">
                 <input id="edit-teacher-btn" type="submit" value="Edit">
             </form>
-        <%--</c:otherwise>
-    </c:choose>--%>
     <c:if test="${not empty pageContent.attributes.get('teachers')}">
         <table id="teachers-table">
             <thead>
@@ -105,7 +89,6 @@
             </tr>
             </thead>
             <tbody>
-                <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
             <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
                 <tr>
                     <td>${teacher.id}</td>
@@ -119,73 +102,61 @@
 </div>
 <div id="lessons-page">
     <form id="add-lesson-form" class="add-form" method="POST" action="controller">
-        <label for="teacher-id-select">
+        <label for="lesson-add-teacher-id-select">
             Teacher id:
-            <select id="teacher-id-select" name="teacherId">
+            <select id="lesson-add-teacher-id-select" name="teacherId">
                 <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
                 <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
                     <option>${teacher.id}</option>
                 </c:forEach>
             </select>
         </label>
-        <label for="group-id-select">
+        <label for="lesson-add-group-id-select">
             Group id:
-            <select id="group-id-select" name="groupId">
+            <select id="lesson-add-group-id-select" name="groupId">
                 <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
                 <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
                     <option>${group.id}</option>
                 </c:forEach>
             </select>
         </label>
-        <label for="subject-id-select">
+        <label for="lesson-add-subject-id-select">
             Subject id:
-            <select id="subject-id-select" name="groupId">
+            <select id="lesson-add-subject-id-select" name="groupId">
                 <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
                 <c:forEach var="group" items="${pageContent.attributes.get('subjects')}">
                     <option>${group.id}</option>
                 </c:forEach>
             </select>
         </label>
-        <input type="hidden" name="command" value="add_lesson">
-        <input type="submit" value="submit">
+        <input id="lesson-add-btn" type="submit" value="submit">
     </form>
-    <form id="delete-lesson-form" class="delete-form" method="POST" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="delete_lesson">
-        <input type="submit" value="delete">
+    <form id="delete-lesson-form" class="delete-form">
+        <input id="lesson-delete-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="lesson-delete-btn" type="submit" value="delete">
     </form>
-    <form id="find-lesson-form" class="find-form" method="get" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="get_lesson">
-        <input class="find-btn" type="submit" value="find">
+    <form id="find-lesson-form" class="find-form">
+        <input id="lesson-find-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="lesson-find-btn" class="find-btn" type="submit" value="">
     </form>
-    <%--<c:choose>
-        <c:when test="${pageContent.attributes.get('foundLesson') eq null}">
-        </c:when>
-        <c:when test="${empty pageContent.attributes.get('foundLesson')}">--%>
-            <h3 id="lesson-not-found-msg" clas="not-found-msg">No lesson found</h3>
-       <%-- </c:when>
-        <c:otherwise>--%>
-            <form id="edit-lessons-form" class="edit-from" method="POST" action="controller">
-                <input type="hidden" name="command" value="update_lesson">
-                <input type="hidden" name="id" value="${pageContent.attributes.get('foundStudent').id}">
-                <select>
+            <h3 id="lesson-not-found-msg" class="not-found-msg">No lesson found</h3>
+            <form id="lesson-edit-form" class="edit-from">
+                <input id="lesson-edit-id-input" type="hidden" name="id" value="">
+                <select id="lesson-edit-teacher-id-select">
                         <%--@elvariable id="teacher" type="org.bsuir.dto.Teacher"--%>
                     <c:forEach var="teacher" items="${pageContent.attributes.get('teachers')}">
                         <option>${teacher.id}</option>
                     </c:forEach>
                 </select>
-                <select>
+                <select id="lesson-edit-group-select">
                         <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
                     <c:forEach var="group" items="${pageContent.attributes.get('groups')}">
                         <option>${group.id}</option>
                     </c:forEach>
                 </select>
-                <input type="text" name="subjectId" placeholder="Subject id..." value="${foundLesson.subjectId}">
+                <input id="lesson-edit-subject-input" type="text" name="subjectId" placeholder="Subject id..." value="">
                 <input type="submit" value="edit">
             </form>
-      <%--  </c:otherwise>
-    </c:choose>--%>
     <c:if test="${not empty pageContent.attributes.get('lessons')}">
         <table id="lessons-table">
             <thead>
@@ -196,7 +167,7 @@
                 <th>subject</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="lessons-tbody">
                 <%--@elvariable id="lesson" type="org.bsuir.dto.Lesson--%>
             <c:forEach var="lesson" items="${pageContent.attributes.get('lessons')}">
                 <tr>
@@ -212,45 +183,40 @@
 </div>
 <div id="students-page">
     <form id="add-student-form" class="add-form" method="POST" action="controller">
-        <input type="text" name="name" placeholder="Name..." required="required">
-        <input type="text" name="surname" placeholder="Surname..." required="required">
-        <input type="text" name="rating" placeholder="Rating..." required="required">
-        <select>
+        <input id="add-student-name-input" type="text" name="name" placeholder="Name..." required="required">
+        <input id="add-student-surname-input" type="text" name="surname" placeholder="Surname..." required="required">
+        <input id="add-student-rating-input" type="text" name="rating" placeholder="Rating..." required="required">
+        <select id="add-student-group-select">
             <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
             <c:forEach var="group" items="${requestScope.PageContent.attributes.get('groups')}">
                 <option>${group.id}</option>
             </c:forEach>
         </select>
         <%--<input type="text" name="groupId" placeholder="Group id..." required="required">--%>
-        <input type="hidden" name="command" value="add_student">
-        <input type="submit" value="submit">
+        <input id="add-student-btn" type="submit" value="submit">
     </form>
-    <form id="students-delete-form" class="delete-form" method="POST" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="delete_student">
-        <input type="submit" value="delete">
+    <form id="students-delete-form" class="delete-form">
+        <input id="delete-student-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="delete-student-btn" type="submit" value="delete">
     </form>
-    <form id=students-find-form class="find-by-id-form" method="get" action="controller">
-        <input type="text" name="id" placeholder="Id..." required="required">
-        <input type="hidden" name="command" value="get_student">
-        <input class="find-btn" type="submit" value="find">
+    <form id="student-edit-form" class="find-by-id-form">
+        <input id="find-student-id-input" type="text" name="id" placeholder="Id..." required="required">
+        <input id="find-student-btn" class="find-btn" type="submit" value="find">
     </form>
-    <%--<c:choose>
-        <c:when test="${empty foundStudent}">
-        </c:when>
-        <c:otherwise>--%>
     <h3 id="student-not-found-msg" class="not-found-msg">No student found</h3>
-    <form id="students-edit-form" class="edit-from" method="POST" action="controller">
-                <input type="hidden" name="command" value="update_student">
-                <input type="hidden" name="id" value="${foundStudent.id}">
-                <input type="text" name="name" placeholder="Name..." value="${foundStudent.name}">
-                <input type="text" name="surname" placeholder="Surname..." value="${foundStudent.surname}">
-                <input type="text" name="rating" placeholder="rating..." value="${foundStudent.rating}">
-                <input type="text" name="group" placeholder="Group..." value="${foundStudent.group}">
-                <input type="submit" value="edit">
+    <form id="student-edit-form">
+                <input id="student-edit-id-input" type="hidden" name="id" value="">
+                <input id="student-edit-name-input" type="text" name="name" placeholder="Name..." value="">
+                <input id="student-edit-surname-input" type="text" name="surname" placeholder="Surname..." value="">
+                <input id="student-edit-rating-input" type="text" name="rating" placeholder="rating..." value="">
+        <select id="student-edit-group-select">
+            <%--@elvariable id="group" type="org.bsuir.dto.Group"--%>
+            <c:forEach var="group" items="${requestScope.PageContent.attributes.get('groups')}">
+                <option>${group.id}</option>
+            </c:forEach>
+        </select>
+                <input id="student-edit-btn" type="submit" value="edit">
             </form>
-      <%--  </c:otherwise>
-    </c:choose>--%>
     <c:if test="${not empty requestScope.PageContent.attributes.get('students')}">
         <table id="students-table">
             <thead>

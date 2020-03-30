@@ -56,7 +56,7 @@ class DataManager {
         this.updateTeacherURL = 'http://localhost:8081/teachers/update';
         this.updateSubjectURL = 'http://localhost:8081/subjects/update';
         this.updateStudentURL = 'http://localhost:8081/students/update';
-        this.updateLessonURL = 'http://localhsot:8081/lessons/update';
+        this.updateLessonURL = 'http://localhost:8081/lessons/update';
     }
 
     loadAllTeachers() {

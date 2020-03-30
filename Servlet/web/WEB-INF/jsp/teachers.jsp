@@ -29,7 +29,7 @@
         <h3>No teacher found</h3>
     </c:when>
     <c:otherwise>
-        <form id="edit-teacher-form" class="edit-from" method="POST" action="controller">
+        <form id="teacher-edit-form" class="edit-from" method="POST" action="controller">
             <input type="hidden" name="command" value="update_teacher">
             <input type="hidden" name="id" value="${foundTeacher.id}">
             <input type="text" name="name" placeholder="Name..." value="${foundTeacher.name}">
