@@ -1,6 +1,9 @@
 package com.bsuir.teacher;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -13,7 +16,11 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotEmpty(message = "name was not provided")
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid name format")
     private String name;
+    @NotEmpty(message = "surname was not provided")
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid surname format")
     private String surname;
 
     public Long getId() {

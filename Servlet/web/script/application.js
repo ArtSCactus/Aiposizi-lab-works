@@ -135,7 +135,6 @@ class DataManager {
         return this.executeDeleteToRest(this.studentByIdURL + id);
     }
 
-    //TODO: Rewrite on $.ajax
     /** Executes GET request by url and returns *.responseText.
      *
      * @param url (like http://localhost:8081/teachers/all), only ports: 8081, 8080 is allowed
@@ -157,7 +156,7 @@ class DataManager {
         }
     }
 
-    //TODO: Rewrite on $.ajax
+
     executePostToRest(url, json) {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', url, false);
@@ -166,7 +165,6 @@ class DataManager {
         return xhr.status;
     }
 
-//TODO: Rewrite on $.ajax
     executeDeleteToRest(url) {
         let xhr = new XMLHttpRequest();
         xhr.open('DELETE', url, false);

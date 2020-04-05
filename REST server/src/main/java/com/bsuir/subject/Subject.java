@@ -1,6 +1,8 @@
 package com.bsuir.subject;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 /**
@@ -13,7 +15,9 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid name format.")
     private String name;
+    @DecimalMin(value = "1", message = "Minimal value is 1")
     private Integer hours;
 
     public Subject() {

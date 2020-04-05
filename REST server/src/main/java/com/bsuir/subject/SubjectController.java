@@ -11,6 +11,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -40,25 +41,25 @@ public class SubjectController {
 
     @PutMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addLesson(@RequestBody String jsonObj) {
+    HttpStatus addLesson(@Valid @RequestBody Subject jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Gson gson = new Gson();
-        Subject student = gson.fromJson(jsonObj, Subject.class);
-        subjectRepository.save(student);
+      //  Gson gson = new Gson();
+        //Subject student = gson.fromJson(jsonObj, Subject.class);
+        subjectRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
 
     @PostMapping(path = "/update")
     public @ResponseBody
-    HttpStatus updateLesson(@RequestBody String jsonObj) {
+    HttpStatus updateLesson(@Valid @RequestBody Subject jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Gson gson = new Gson();
-        Subject subject = gson.fromJson(jsonObj, Subject.class);
-        subjectRepository.save(subject);
+        //Gson gson = new Gson();
+       // Subject subject = gson.fromJson(jsonObj, Subject.class);
+        subjectRepository.save(jsonObj);
         return HttpStatus.OK;
     }
 

@@ -1,6 +1,8 @@
 package com.bsuir.student;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 @Entity
 @Table(name="students")
@@ -8,10 +10,14 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid name format")
     private String name;
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid surname format")
     private String surname;
+    @DecimalMin(value = "0", message = "Minimal value is 0")
     private Long rating;
     @Column(name="students.group")
+    @DecimalMin(value = "0", message = "Invalid group number. 0 is minimal")
     private Long group;
 
     public Student(){

@@ -1,6 +1,7 @@
 package com.bsuir.group;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 @Entity
 @Table(name="students_groups")
@@ -8,7 +9,9 @@ public class StudentGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Pattern(regexp = "[A-zА-я]+", message = "Invalid group name format")
     private String name;
+    @Pattern(regexp = "[A-zА-я]+(\\s*[A-zА-я]+)*", message = "Invalid specialty name format")
     private String specialty;
 
     public StudentGroup(){

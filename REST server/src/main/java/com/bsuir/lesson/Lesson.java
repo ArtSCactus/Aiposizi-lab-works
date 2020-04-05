@@ -1,6 +1,7 @@
 package com.bsuir.lesson;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.util.Objects;
 
 @Entity
@@ -10,10 +11,13 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "lessons.group")
+    @DecimalMin(value = "0", message = "Invalid group id. 0 is minimal")
     private Long groupId;
     @Column(name = "subject")
+    @DecimalMin(value = "0", message = "Invalid subject id. 0 is minimal")
     private Long subjectId;
     @Column(name = "teacher")
+    @DecimalMin(value = "0", message = "Invalid teacher id. 0 is minimal")
     private Long teacherId;
 
     public Lesson() {

@@ -11,6 +11,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -40,29 +41,29 @@ public class StudentController {
 
     @PutMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addStudent(@RequestBody String jsonObj) {
+    HttpStatus addStudent(@Valid @RequestBody Student jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Gson gson = new Gson();
-        Student student = gson.fromJson(jsonObj, Student.class);
-        studentRepository.save(student);
+        //Gson gson = new Gson();
+      //  Student student = gson.fromJson(jsonObj, Student.class);
+        studentRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
 
     @PostMapping(path = "/update")
     public @ResponseBody
-    HttpStatus updateStudent(@RequestBody String jsonObj) {
+    HttpStatus updateStudent(@Valid @RequestBody Student jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Gson gson = new Gson();
-        Student student = gson.fromJson(jsonObj, Student.class);
-        studentRepository.save(student);
+        //Gson gson = new Gson();
+       // Student student = gson.fromJson(jsonObj, Student.class);
+        studentRepository.save(jsonObj);
         return HttpStatus.OK;
     }
-
-    @PostMapping(path = "/add")
+    //TODO: delete if not using
+   /* @PostMapping(path = "/add")
     public @ResponseBody
     HttpStatus addNewStudent(@RequestParam Long id
             , @RequestParam String name, @RequestParam String surname, @RequestParam Long rating, @RequestParam Long group) {
@@ -74,7 +75,7 @@ public class StudentController {
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return HttpStatus.OK;
-    }
+    }*/
 
     @GetMapping(path = "/all")
     public @ResponseBody
