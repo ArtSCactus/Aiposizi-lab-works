@@ -16,7 +16,7 @@ import java.util.Optional;
 public class LessonRestService extends LessonService {
     @Override
     public List<Lesson> getAllLessons() {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Lesson> lessonDao = dao.getLessonRestDao();
             return lessonDao.getAll();
         }
@@ -24,7 +24,7 @@ public class LessonRestService extends LessonService {
 
     @Override
     public Optional<Lesson> getById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Lesson> lessonDao = dao.getLessonRestDao();
             return lessonDao.getById(id);
         }
@@ -32,7 +32,7 @@ public class LessonRestService extends LessonService {
 
     @Override
     public int update(Lesson lesson) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Lesson> lessonDao = dao.getLessonRestDao();
             return lessonDao.save(lesson);
         }
@@ -40,7 +40,7 @@ public class LessonRestService extends LessonService {
 
     @Override
     public int removeById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Lesson> lessonDao = dao.getLessonRestDao();
             return lessonDao.removeById(id);
         }

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class TeacherRestService extends TeacherService {
     @Override
     public List<Teacher> getAllTeachers() {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Teacher> teacherDao = dao.getTeacherRestDao();
             return teacherDao.getAll();
         }
@@ -25,7 +25,7 @@ public class TeacherRestService extends TeacherService {
 
     @Override
     public void createTeacher(String name, String surname) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Teacher> teacherDao = dao.getTeacherRestDao();
             teacherDao.save(new Teacher(null, name, surname));
         }
@@ -33,7 +33,7 @@ public class TeacherRestService extends TeacherService {
 
     @Override
     public Optional<Teacher> getById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Teacher> teacherDao = dao.getTeacherRestDao();
             return teacherDao.getById(id);
         }
@@ -41,7 +41,7 @@ public class TeacherRestService extends TeacherService {
 
     @Override
     public int update(Teacher teacher) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Teacher> teacherDao = dao.getTeacherRestDao();
             return teacherDao.save(teacher);
         }
@@ -49,7 +49,7 @@ public class TeacherRestService extends TeacherService {
 
     @Override
     public void removeById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Teacher> teacherDao = dao.getTeacherRestDao();
             teacherDao.removeById(id);
         }

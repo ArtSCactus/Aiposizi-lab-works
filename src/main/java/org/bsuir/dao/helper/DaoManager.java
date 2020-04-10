@@ -16,6 +16,12 @@ public class DaoManager implements AutoCloseable {
         this.connection = connectionPool.getConnection();
     }
 
+    /**Should be called if no database connection is needed.
+     *
+     */
+    public DaoManager(){
+    }
+
     /**
      * @return DaoManager obj
      * @deprecated use DaoFactory instead
@@ -67,7 +73,9 @@ public class DaoManager implements AutoCloseable {
     @Override
     public void close() throws DaoException {
         try {
-            connection.close();
+            if (connection !=null){
+                connection.close();
+            }
         } catch (SQLException e) {
             throw new DaoException(e);
         }

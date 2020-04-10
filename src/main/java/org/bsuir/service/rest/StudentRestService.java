@@ -16,7 +16,7 @@ import java.util.Optional;
 public class StudentRestService extends StudentService {
     @Override
     public List<Student> getAllStudents() {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Student> studentDao = dao.getStudentRestDao();
             return studentDao.getAll();
         }
@@ -24,7 +24,7 @@ public class StudentRestService extends StudentService {
 
     @Override
     public void update(Student item) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Student> studentDao = dao.getStudentRestDao();
             studentDao.save(item);
         }
@@ -32,7 +32,7 @@ public class StudentRestService extends StudentService {
 
     @Override
     public void delete(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Student> studentDao = dao.getStudentRestDao();
             studentDao.removeById(id);
         }
@@ -40,7 +40,7 @@ public class StudentRestService extends StudentService {
 
     @Override
     public Optional<Student> getById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Student> studentDao = dao.getStudentRestDao();
             return studentDao.getById(id);
         }

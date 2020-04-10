@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final ReentrantLock LOCK = new ReentrantLock();
-    private static int initialCapacity = 100;
+    private static int initialCapacity = 10;
     private static final String RESOURCES_PATH = "config/connection pool.properties";
     private static volatile ConnectionPool pool;
     private BlockingQueue<Connection> freeConnections;
@@ -58,6 +58,7 @@ public class ConnectionPool {
         }
         freeConnections = new ArrayBlockingQueue<>(initialCapacity);
         busyConnections = new ArrayBlockingQueue<>(initialCapacity);
+
         for (int index = 0; index < initialCapacity; index++) {
             try {
                 Connection connection = new ProxyConnection(DriverManager.getConnection(databaseUrl, user, password));

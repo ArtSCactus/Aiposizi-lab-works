@@ -17,7 +17,7 @@ import java.util.Optional;
 public class SubjectRestService extends SubjectService {
     @Override
     public Optional<Subject> getById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Subject> subjectDao = dao.getSubjectRestDao();
             return subjectDao.getById(id);
         }
@@ -25,15 +25,15 @@ public class SubjectRestService extends SubjectService {
 
     @Override
     public List<Subject> getAll() {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
-            Dao<Subject> subjectDao = dao.getSubjectDao();
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
+            Dao<Subject> subjectDao = dao.getSubjectRestDao();
             return subjectDao.getAll();
         }
     }
 
     @Override
     public int update(Subject subject) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Subject> subjectDao = dao.getSubjectRestDao();
             return subjectDao.save(subject);
         }
@@ -41,7 +41,7 @@ public class SubjectRestService extends SubjectService {
 
     @Override
     public int removeById(Long id) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Subject> subjectDao = dao.getSubjectRestDao();
             return subjectDao.removeById(id);
         }
@@ -49,7 +49,7 @@ public class SubjectRestService extends SubjectService {
 
     @Override
     public void create(String name, Integer hours) {
-        try (DaoManager dao = DaoFactory.createDaoManager()) {
+        try (DaoManager dao = DaoFactory.createRestDaoManager()) {
             Dao<Subject> subjectDao = dao.getSubjectRestDao();
             subjectDao.save(new Subject(null, name, hours));
         }

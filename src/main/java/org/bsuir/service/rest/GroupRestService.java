@@ -15,7 +15,7 @@ import java.util.List;
 public class GroupRestService extends GroupService {
     @Override
     public List<Group> getAllGroups() {
-        try(DaoManager dao = DaoFactory.createDaoManager()){
+        try(DaoManager dao = DaoFactory.createRestDaoManager()){
             Dao<Group> groupDao = dao.getGroupRestDao();
             return groupDao.getAll();
         }
