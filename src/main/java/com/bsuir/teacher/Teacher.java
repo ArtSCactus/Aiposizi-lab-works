@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @version 1.0
  */
 @Entity
-@Table(name = "teachers")
+@Table(name = "teachers", schema = "university")
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
