@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 @Entity
-@Table(name="students_groups")
+@Table(name="groups", schema = "university")
 public class StudentGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,7 +5,7 @@ import javax.validation.constraints.DecimalMin;
 import java.util.Objects;
 
 @Entity
-@Table(name = "lessons")
+@Table(name = "lessons", schema = "university")
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
