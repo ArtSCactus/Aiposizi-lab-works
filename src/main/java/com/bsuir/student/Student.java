@@ -5,7 +5,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 @Entity
-@Table(name="students")
+@Table(name="students", schema = "university")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,7 @@ public class Student {
     private String surname;
     @DecimalMin(value = "0", message = "Minimal value is 0")
     private Long rating;
-    @Column(name="students.group")
+    @Column(name="group_id")
     @DecimalMin(value = "0", message = "Invalid group number. 0 is minimal")
     private Long group;
 
