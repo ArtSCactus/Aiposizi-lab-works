@@ -15,8 +15,8 @@ public class CORSFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, http://localhost:8080");
+        response.addHeader("Access-Control-Allow-Origin", "http://aipos-main.herokuapp.com");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, http://aipos-main.herokuapp.com");
         response.addHeader("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
         filterChain.doFilter(servletRequest, servletResponse);
     }
