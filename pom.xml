@@ -10,9 +10,10 @@
     </parent>
     <groupId>com.bsuir</groupId>
     <artifactId>REST-server</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Spring REST server</name>
     <description>Spring REST server for university servlet</description>
+    <packaging>war</packaging>
     <distributionManagement>
         <repository>
             <id>github</id>
@@ -37,7 +38,6 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
