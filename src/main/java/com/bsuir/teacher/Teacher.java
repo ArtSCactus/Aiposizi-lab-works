@@ -16,9 +16,11 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name="name")
     @NotEmpty(message = "name was not provided")
     @Pattern(regexp = "[A-zА-я]+", message = "Invalid name format")
     private String name;
+    @Column(name="surname")
     @NotEmpty(message = "surname was not provided")
     @Pattern(regexp = "[A-zА-я]+", message = "Invalid surname format")
     private String surname;

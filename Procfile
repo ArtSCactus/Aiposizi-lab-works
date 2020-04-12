@@ -1,1 +1,1 @@
-web: java -jar target/REST-server-1.0.war
+web: java -jar target/REST-server-1.0.war -Dserver.port=$PORT
