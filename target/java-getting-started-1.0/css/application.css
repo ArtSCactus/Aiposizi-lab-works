@@ -1,0 +1,11 @@
+#students-page, #subjects-page, #lessons-page {
+    display: none;
+}
+
+#teacher-edit-form, #student-edit-from, #lesson-edit-form, #subject-edit-form {
+    display: none;
+}
+
+#teacher-not-found-msg, #student-not-found-msg, #lesson-not-found-msg, #subject-not-found-msg {
+    display: none;
+}
