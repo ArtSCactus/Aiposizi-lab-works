@@ -1,6 +1,5 @@
 package com.bsuir.teacher;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +41,13 @@ public class TeacherController {
 
     @PutMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addTeacher(@RequestBody String jsonObj) {
+    HttpStatus addTeacher(@RequestBody Teacher jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        Gson gson = new Gson();
-        Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
-        teacherRepository.save(teacher);
+       // Gson gson = new Gson();
+       // Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
+        teacherRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
 
