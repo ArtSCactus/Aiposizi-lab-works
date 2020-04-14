@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/groups")
 public class GroupController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
     @Autowired
     private GroupRepository groupRepository;
 

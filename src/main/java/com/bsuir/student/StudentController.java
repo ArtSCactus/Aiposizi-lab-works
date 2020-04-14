@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/students")
 public class StudentController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
     @Autowired
     private StudentRepository studentRepository;
 

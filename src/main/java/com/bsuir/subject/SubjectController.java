@@ -15,12 +15,12 @@ import java.util.Optional;
 
 /**
  * @author ArtSCactus
- * @version 1.0
+ * @version 1.0templates
  */
 @RestController
 @RequestMapping("/subjects")
 public class SubjectController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SubjectController.class);
     @Autowired
     private SubjectRepository subjectRepository;
 
