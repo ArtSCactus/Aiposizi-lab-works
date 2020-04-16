@@ -5,12 +5,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -19,6 +23,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/subjects")
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class SubjectController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubjectController.class);
     @Autowired
@@ -44,8 +49,6 @@ public class SubjectController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-      //  Gson gson = new Gson();
-        //Subject student = gson.fromJson(jsonObj, Subject.class);
         subjectRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
@@ -56,16 +59,14 @@ public class SubjectController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        //Gson gson = new Gson();
-       // Subject subject = gson.fromJson(jsonObj, Subject.class);
         subjectRepository.save(jsonObj);
         return HttpStatus.OK;
     }
 
     @PostMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addNewStudent(@RequestParam Long id
-            , @RequestParam String name, @RequestParam Integer hours){
+    HttpStatus addNewStudent(@Valid @RequestParam Long id
+            ,@Valid @RequestParam String name, @Valid @RequestParam Integer hours){
         Subject n = new Subject(id, name, hours);
         try {
             subjectRepository.save(n);
@@ -102,5 +103,18 @@ public class SubjectController {
                 request.getRequestURI(),
                 request.getRemoteAddr(),
                 request.getRemotePort()));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }

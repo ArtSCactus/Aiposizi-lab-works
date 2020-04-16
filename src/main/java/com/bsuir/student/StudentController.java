@@ -5,12 +5,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -19,6 +23,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/students")
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class StudentController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
     @Autowired
@@ -31,7 +36,7 @@ public class StudentController {
                 .getRequest();
         logRequest(request);
         Optional<Student> targetObj = studentRepository.findById(id);
-        if (!targetObj.isPresent()){
+        if (!targetObj.isPresent()) {
             return HttpStatus.NOT_FOUND;
         }
         studentRepository.deleteById(id);
@@ -44,8 +49,6 @@ public class StudentController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        //Gson gson = new Gson();
-      //  Student student = gson.fromJson(jsonObj, Student.class);
         studentRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
@@ -56,25 +59,9 @@ public class StudentController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        //Gson gson = new Gson();
-       // Student student = gson.fromJson(jsonObj, Student.class);
         studentRepository.save(jsonObj);
         return HttpStatus.OK;
     }
-    //TODO: delete if not using
-   /* @PostMapping(path = "/add")
-    public @ResponseBody
-    HttpStatus addNewStudent(@RequestParam Long id
-            , @RequestParam String name, @RequestParam String surname, @RequestParam Long rating, @RequestParam Long group) {
-        Student n = new Student(id, name, surname, rating, group);
-        try {
-            studentRepository.save(n);
-        } catch (RuntimeException e) {
-            LOGGER.error(e.getCause().getMessage());
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return HttpStatus.OK;
-    }*/
 
     @GetMapping(path = "/all")
     public @ResponseBody
@@ -94,6 +81,19 @@ public class StudentController {
         logRequest(request);
         Optional<Student> teacherOptional = studentRepository.findById(id);
         return teacherOptional.orElse(null);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
     private void logRequest(HttpServletRequest request) {

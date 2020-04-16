@@ -19,6 +19,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/groups")
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class GroupController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
     @Autowired
@@ -44,8 +45,6 @@ public class GroupController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-       // Gson gson = new Gson();
-       // StudentGroup student = gson.fromJson(jsonObj, StudentGroup.class);
         groupRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
@@ -56,8 +55,6 @@ public class GroupController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-       // Gson gson = new Gson();
-       // StudentGroup lesson = gson.fromJson(jsonObj, StudentGroup.class);
         groupRepository.save(jsonObj);
         return HttpStatus.OK;
     }

@@ -5,12 +5,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -19,6 +23,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/lessons")
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class LessonController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LessonController.class);
     @Autowired
@@ -44,8 +49,6 @@ public class LessonController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-       // Gson gson = new Gson();
-      //  Lesson student = gson.fromJson(jsonObj, Lesson.class);
         lessonRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
@@ -56,16 +59,14 @@ public class LessonController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-      //  Gson gson = new Gson();
-       // Lesson lesson = gson.fromJson(jsonObj, Lesson.class);
         lessonRepository.save(jsonObj);
         return HttpStatus.OK;
     }
 
     @PostMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addNewStudent(@RequestParam Long id
-            , @RequestParam Long groupId, @RequestParam Long subjectId, @RequestParam Long teacherId) {
+    HttpStatus addNewStudent(@Valid @RequestParam Long id
+            ,@Valid @RequestParam Long groupId,@Valid @RequestParam Long subjectId,@Valid @RequestParam Long teacherId) {
         Lesson n = new Lesson(id, groupId, subjectId, teacherId);
         try {
             lessonRepository.save(n);
@@ -94,6 +95,20 @@ public class LessonController {
         Optional<Lesson> lessonOptional = lessonRepository.findById(id);
         return lessonOptional.orElse(null);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
+
 
     private void logRequest(HttpServletRequest request) {
         LOGGER.info(String.format("request:\nmethod:%s\nheader:%s\nuri:%s\nfrom addr:%s\nfrom port:%s",

@@ -20,6 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/teachers")
 @Validated
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class TeacherController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
     @Autowired
@@ -41,7 +42,7 @@ public class TeacherController {
 
     @PutMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addTeacher(@RequestBody Teacher jsonObj) {
+    HttpStatus addTeacher(@Valid @RequestBody Teacher jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
@@ -57,16 +58,14 @@ public class TeacherController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-        //Gson gson = new Gson();
-       // Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
         teacherRepository.save(jsonObj);
         return HttpStatus.OK;
     }
 
     @PostMapping(path = "/add")
     public @ResponseBody
-    HttpStatus addNewUser(@RequestParam String name
-            , @RequestParam String surname) {
+    HttpStatus addNewUser(@Valid @RequestParam String name
+            ,@Valid @RequestParam String surname) {
         Teacher n = new Teacher();
         n.setName(name);
         n.setSurname(surname);
