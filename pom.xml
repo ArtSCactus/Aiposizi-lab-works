@@ -12,7 +12,7 @@
     <artifactId>university-rest</artifactId>
     <version>1.0</version>
     <name>rest-server</name>
-    <description>Back-end server for university app</description>
+    <description>JSON server for university app</description>
 
     <properties>
         <java.version>1.8</java.version>

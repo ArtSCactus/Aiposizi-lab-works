@@ -10,7 +10,7 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "lessons.group")
+    @Column(name = "group_id")
     @DecimalMin(value = "0", message = "Invalid group id. 0 is minimal")
     private Long groupId;
     @Column(name = "subject")
