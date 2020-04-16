@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/groups")
-@CrossOrigin(origins = "https://university-view.herokuapp.com")
+@CrossOrigin(origins = "http://university-view.herokuapp.com")
 public class GroupController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
     @Autowired
