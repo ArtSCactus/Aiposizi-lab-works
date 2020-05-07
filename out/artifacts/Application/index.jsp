@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: user
+  User: customUserDetails
   Date: 15.02.2020
   Time: 11:34
   To change this template use File | Settings | File Templates.

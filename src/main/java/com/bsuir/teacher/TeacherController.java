@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,55 +12,52 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/teachers")
 @Validated
-@CrossOrigin(origins = "http://university-view.herokuapp.com")
 public class TeacherController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
     @Autowired
     private TeacherRepository teacherRepository;
 
     @DeleteMapping(path = "/{id}")
-    public @ResponseBody
-    HttpStatus deleteTeacher(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public
+    void deleteTeacher(@PathVariable Long id) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         Optional<Teacher> targetObj = teacherRepository.findById(id);
-        if (!targetObj.isPresent()) {
-            return HttpStatus.NOT_FOUND;
-        }
         teacherRepository.deleteById(id);
-        return HttpStatus.OK;
     }
 
     @PutMapping(path = "/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody
     HttpStatus addTeacher(@Valid @RequestBody Teacher jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
-       // Gson gson = new Gson();
-       // Teacher teacher = gson.fromJson(jsonObj, Teacher.class);
         teacherRepository.save(jsonObj);
         return HttpStatus.CREATED;
     }
 
     @PostMapping(path = "/update")
-    public @ResponseBody
-    HttpStatus updateTeacher(@Valid @RequestBody Teacher jsonObj) {
+    public ResponseEntity<HttpStatus> updateTeacher(@Valid @RequestBody Teacher jsonObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         teacherRepository.save(jsonObj);
-        return HttpStatus.OK;
+        return ResponseEntity.status(200).build();
     }
 
     @PostMapping(path = "/add")
@@ -75,7 +73,7 @@ public class TeacherController {
             LOGGER.error(e.getCause().getMessage());
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return HttpStatus.OK;
+        return HttpStatus.CREATED;
     }
 
     @GetMapping(path = "/all")
@@ -89,13 +87,12 @@ public class TeacherController {
     }
 
     @GetMapping(path = "/{id}")
-    public @ResponseBody
-    Teacher getById(@PathVariable Long id) {
+    public ResponseEntity<Teacher> getById(@PathVariable Long id) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);
         Optional<Teacher> teacherOptional = teacherRepository.findById(id);
-        return teacherOptional.orElse(null);
+        return ResponseEntity.of(teacherOptional);
     }
 
     private void logRequest(HttpServletRequest request) {

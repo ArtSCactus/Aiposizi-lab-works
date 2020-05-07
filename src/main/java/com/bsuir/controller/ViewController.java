@@ -29,4 +29,9 @@ public class ViewController {
 
         return "index";
     }
+
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public String login(Model model){
+        return "index";
+    }
 }
