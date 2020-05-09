@@ -50,7 +50,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(existingUser, "", existingUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(token);
         }
-                response.sendRedirect("http://localhost:8081/auth/oauth-2-endpoint");
+                response.sendRedirect("https://university-rest-server.herokuapp.com/auth/oauth-2-endpoint");
     }
 
 
