@@ -79,7 +79,6 @@ public class TeacherController {
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Teacher> getAllUsers() {
-        // This returns a JSON or XML with the user
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
         logRequest(request);

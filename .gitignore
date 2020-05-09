@@ -1,11 +1,5 @@
 HELP.md
-target/dependency/
-target/generated-sources/
-target/maven-archiver/
-target/maven-status/
-target/REST-server-1.0/
-target/tomcat.8080/
-target/tomcat.8081/
+target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -24,14 +18,3 @@ target/tomcat.8081/
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-
-### VS Code ###
-.vscode/

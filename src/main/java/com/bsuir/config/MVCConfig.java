@@ -24,7 +24,7 @@ public class MVCConfig implements Filter, WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/teachers/**")
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://university-view.herokuapp.com")
                 .allowedHeaders("Access-Control-Allow-Origin")
                 .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS")
                 .allowCredentials(true);
@@ -34,7 +34,7 @@ public class MVCConfig implements Filter, WebMvcConfigurer {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         System.out.println("WebConfig: " + request.getRequestURI());
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080, http://university-view.herokuapp.com");
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe");
         response.setHeader("Access-Control-Max-Age", "3600");
@@ -53,7 +53,7 @@ public class MVCConfig implements Filter, WebMvcConfigurer {
             }
         } else {
             System.out.println("Pre-flight");
-            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080, http://university-view.herokuapp.com");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Headers", "Access-Control-Expose-Headers" + "Authorization, content-type," +

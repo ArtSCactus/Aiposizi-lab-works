@@ -21,8 +21,6 @@ import java.io.IOException;
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
     private UserRepository repository;
 
     @GetMapping("/oauth-2-endpoint")
@@ -30,11 +28,11 @@ public class AuthController {
        User user = extractUser();
         String token = JwtTokenUtil.generateToken(user);
         Cookie cookie = new Cookie("access-token", token);
-        cookie.setMaxAge(2 * 60 * 60);
+        cookie.setMaxAge(1 * 60 * 60);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
-        response.sendRedirect("http://localhost:8080");
+        response.sendRedirect("http://university-view.herokuapp.com");
     }
 
     @PostMapping("/refresh-token")
@@ -82,7 +80,7 @@ public class AuthController {
 
     @GetMapping("/application-logout")
     public void appLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cookie accessTokenCookie = new Cookie("access-token","expired");//WebUtils.getCookie(request, "access-token");
+        Cookie accessTokenCookie = new Cookie("access-token","expired");
         accessTokenCookie.setValue("expired");
         accessTokenCookie.setMaxAge(0);
         accessTokenCookie.setPath("/");
@@ -98,7 +96,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<HttpStatus> logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie accessTokenCookie = new Cookie("access-token","expired");//WebUtils.getCookie(request, "access-token");
+        Cookie accessTokenCookie = new Cookie("access-token","expired");
             accessTokenCookie.setValue("expired");
             accessTokenCookie.setMaxAge(0);
             accessTokenCookie.setPath("/");
