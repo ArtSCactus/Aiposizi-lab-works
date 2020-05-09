@@ -25,14 +25,14 @@ public class AuthController {
 
     @GetMapping("/oauth-2-endpoint")
     public void redirectToApplication(HttpServletResponse response) throws IOException {
-       User user = extractUser();
+        User user = extractUser();
         String token = JwtTokenUtil.generateToken(user);
         Cookie cookie = new Cookie("access-token", token);
         cookie.setMaxAge(1 * 60 * 60);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
-        response.sendRedirect("http://university-view.herokuapp.com");
+        response.sendRedirect("https://university-view.herokuapp.com");
     }
 
     @PostMapping("/refresh-token")
@@ -80,34 +80,48 @@ public class AuthController {
 
     @GetMapping("/application-logout")
     public void appLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cookie accessTokenCookie = new Cookie("access-token","expired");
+        Cookie accessTokenCookie = new Cookie("access-token", "expired");
         accessTokenCookie.setValue("expired");
         accessTokenCookie.setMaxAge(0);
         accessTokenCookie.setPath("/");
         accessTokenCookie.setHttpOnly(true);
         response.addCookie(accessTokenCookie);
-        HttpSession session= request.getSession(false);
+        HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();
-        if(session != null) {
+        if (session != null) {
             session.invalidate();
         }
-        response.sendRedirect("http://localhost:8080");
+        response.sendRedirect("https://university-view.herokuapp.com");
     }
 
     @PostMapping("/logout")
     public ResponseEntity<HttpStatus> logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie accessTokenCookie = new Cookie("access-token","expired");
-            accessTokenCookie.setValue("expired");
-            accessTokenCookie.setMaxAge(0);
-            accessTokenCookie.setPath("/");
-            accessTokenCookie.setHttpOnly(true);
-            response.addCookie(accessTokenCookie);
-        HttpSession session= request.getSession(false);
+        Cookie accessTokenCookie = new Cookie("access-token", "expired");
+        accessTokenCookie.setValue("expired");
+        accessTokenCookie.setMaxAge(0);
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setHttpOnly(true);
+        response.addCookie(accessTokenCookie);
+        HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();
-        if(session != null) {
+        if (session != null) {
             session.invalidate();
         }
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/sign-up")
+    public ResponseEntity<HttpStatus> registration(@RequestParam String name,
+                                                   @RequestParam String password,
+                                                   @RequestParam String email) {
+        User user = User.Builder.anUser()
+                .withName(name)
+                .withPassword(password)
+                .withEmail(email)
+                .withRole(Authority.USER)
+                .build();
+        repository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/fast-access")
@@ -131,13 +145,13 @@ public class AuthController {
         }
     }
 
-    private User extractUser(){
+    private User extractUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof DefaultOidcUser){
-           return UserDetailsExtractor.extract((DefaultOidcUser) principal);
+        if (principal instanceof DefaultOidcUser) {
+            return UserDetailsExtractor.extract((DefaultOidcUser) principal);
         } else {
             if (principal instanceof String) {
-                return  User.Builder.anUser()
+                return User.Builder.anUser()
                         .withName((String) principal).build();
             } else {
                 return (User) principal;

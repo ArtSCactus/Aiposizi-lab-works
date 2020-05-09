@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -33,7 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/user/**"
             ,"/teachers/**"};
 
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS);
@@ -41,7 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http                .authorizeRequests()
+        http
+                .authorizeRequests()
                 .antMatchers("/auth/**")
                 .permitAll()
                 .antMatchers(HttpMethod.PUT, MAIN_DATA_URIS).hasAuthority("ADMIN")
@@ -60,16 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
         .deleteCookies("access-token", "JSESSIONID","XSRF-TOKEN")
         .invalidateHttpSession(true)
-                .permitAll()
-               /* .logout().invalidateHttpSession(true)
-                .logoutUrl("/auth/logout")
-                .clearAuthentication(true).deleteCookies("JSESSIONID").permitAll().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())*/;
+                .permitAll();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://university-view.herokuapp.com"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "https://university-view.herokuapp.com"));
         configuration.setAllowedMethods(Arrays.asList("OPTIONS", "GET", "POST", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("application/json"));
         configuration.setAllowCredentials(true);

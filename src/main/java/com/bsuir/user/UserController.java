@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("http://university-view.herokuapp.com")
+@CrossOrigin("https://university-view.herokuapp.com")
 @RequestMapping("user")
 public class UserController {
 

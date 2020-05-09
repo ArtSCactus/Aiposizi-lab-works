@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(path = "/lessons")
-@CrossOrigin(origins = "http://university-view.herokuapp.com")
+@CrossOrigin(origins = "https://university-view.herokuapp.com")
 public class LessonController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LessonController.class);
     @Autowired
