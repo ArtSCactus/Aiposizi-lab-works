@@ -35,7 +35,7 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     @Nullable
-    @Pattern(regexp="^[<>\"\\s]{3,45}")
+    @Pattern(regexp="[^<>\"\\s]{3,45}")
     private String password;
     @Column(name= "authority")
     @Enumerated(EnumType.STRING)
