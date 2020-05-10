@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
@@ -98,13 +97,17 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<HttpStatus> registration(@Valid @RequestBody User newUser) {
-        if(newUser.getPassword() == null)
-    {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-        newUser.setAuthority(Authority.USER);
-        repository.save(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        if (newUser.getPassword() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        User existingUser = repository.findByNameAndPassword(newUser.getName(), newUser.getPassword());
+        if (existingUser == null) {
+            newUser.setAuthority(Authority.USER);
+            repository.save(newUser);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
+        }
     }
 
     @GetMapping("/fast-access")
