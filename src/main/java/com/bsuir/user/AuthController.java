@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -78,22 +80,6 @@ public class AuthController {
         return ResponseEntity.status(200).build();
     }
 
-    @GetMapping("/application-logout")
-    public void appLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cookie accessTokenCookie = new Cookie("access-token", "expired");
-        accessTokenCookie.setValue("expired");
-        accessTokenCookie.setMaxAge(0);
-        accessTokenCookie.setPath("/");
-        accessTokenCookie.setHttpOnly(true);
-        response.addCookie(accessTokenCookie);
-        HttpSession session = request.getSession(false);
-        SecurityContextHolder.clearContext();
-        if (session != null) {
-            session.invalidate();
-        }
-        response.sendRedirect("https://university-view.herokuapp.com");
-    }
-
     @PostMapping("/logout")
     public ResponseEntity<HttpStatus> logout(HttpServletRequest request, HttpServletResponse response) {
         Cookie accessTokenCookie = new Cookie("access-token", "expired");
@@ -111,16 +97,13 @@ public class AuthController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<HttpStatus> registration(@RequestParam String name,
-                                                   @RequestParam String password,
-                                                   @RequestParam String email) {
-        User user = User.Builder.anUser()
-                .withName(name)
-                .withPassword(password)
-                .withEmail(email)
-                .withRole(Authority.USER)
-                .build();
-        repository.save(user);
+    public ResponseEntity<HttpStatus> registration(@Valid User newUser) {
+        if(newUser.getPassword() == null)
+    {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+        newUser.setAuthority(Authority.USER);
+        repository.save(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

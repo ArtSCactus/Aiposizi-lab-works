@@ -6,6 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -23,11 +26,16 @@ public class User implements UserDetails {
     @Column(name="google_id", length = 2000)
     private String googleId;
     @Column(name = "name")
+    @NotEmpty
+    @NotNull
+    @Pattern(regexp = "[A-zА-я]{1,30}")
     private String name;
     @Column(name = "email")
+    @Pattern(regexp = "[A-zА-я_]{1,20}+@[A-z]{1,10}.(com|org|ru|by)")
     private String email;
     @Column(name = "password")
     @Nullable
+    @Pattern(regexp="^[<>\"\\s]{3,45}")
     private String password;
     @Column(name= "authority")
     @Enumerated(EnumType.STRING)
