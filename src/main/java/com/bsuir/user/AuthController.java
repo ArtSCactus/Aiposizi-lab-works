@@ -97,7 +97,7 @@ public class AuthController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<HttpStatus> registration(@Valid User newUser) {
+    public ResponseEntity<HttpStatus> registration(@Valid @RequestBody User newUser) {
         if(newUser.getPassword() == null)
     {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
