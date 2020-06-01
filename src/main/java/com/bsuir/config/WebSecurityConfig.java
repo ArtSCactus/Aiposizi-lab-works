@@ -1,18 +1,17 @@
 package com.bsuir.config;
 
+import com.bsuir.filter.JwtTokenFilter;
 import com.bsuir.handler.CustomAuthenticationSuccessHandler;
-import com.bsuir.jwt.JwtConfigurer;
-import com.bsuir.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,7 +26,8 @@ import java.util.Arrays;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private JwtTokenFilter jwtTokenFilter;
+
     private String[] MAIN_DATA_URIS = new String[]{"/students/**",
             "/groups/**",
             "/lessons/**",
@@ -41,8 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/auth/**")
                 .permitAll()
@@ -50,20 +51,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, MAIN_DATA_URIS)
                 .hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, MAIN_DATA_URIS).hasAnyAuthority("ADMIN", "USER")
-                .and().oauth2Login()
+                .and()
+                .oauth2Login()
                 .successHandler(successHandler())
                 .and()
                 .cors().configurationSource(corsConfigurationSource())
-                .and().apply(new JwtConfigurer(jwtTokenProvider))
                 .and()
-        .csrf().disable()
-        .logout()
+        .csrf().disable();
+       /* .logout()
                 .logoutUrl("/auth/logout")
                 .clearAuthentication(true)
-        .deleteCookies("access-token", "JSESSIONID","XSRF-TOKEN")
+        .deleteCookies("access-token")
         .invalidateHttpSession(true)
-                .permitAll();
+                .permitAll();*/
+        // Custom JWT based security filter
+        // disable page caching
+        http.headers().cacheControl().disable();
     }
+
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

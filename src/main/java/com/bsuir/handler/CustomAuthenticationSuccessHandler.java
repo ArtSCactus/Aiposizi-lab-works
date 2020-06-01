@@ -1,8 +1,9 @@
 package com.bsuir.handler;
 
+import com.bsuir.jwt.JwtTokenUtil;
 import com.bsuir.user.Authority;
 import com.bsuir.user.User;
-import com.bsuir.user.UserRepository;
+import com.bsuir.user.CustomUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,12 +23,10 @@ import java.io.IOException;
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
-    private UserRepository repo;
-
+    private CustomUserRepository repo;
 
     public CustomAuthenticationSuccessHandler() {
         super();
-        setUseReferer(true);
     }
 
     @Override
@@ -46,12 +46,26 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             repo.save(user);
            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities());
            SecurityContextHolder.getContext().setAuthentication(token);
+            User userForId = repo.findByName(user.getName());
+            Cookie cookie = generateToken(userForId);
+            response.addCookie(cookie);
         } else {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(existingUser, "", existingUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(token);
+            Cookie cookie = generateToken(existingUser);
+            response.addCookie(cookie);
+
         }
-                response.sendRedirect("https://university-rest-server.herokuapp.com/auth/oauth-2-endpoint");
+        response.sendRedirect("https://university-view.herokuapp.com");
     }
 
-
+    private Cookie generateToken(User user){
+        String token = JwtTokenUtil.generateToken(user);
+        Cookie cookie = new Cookie("access-token", token);
+        cookie.setMaxAge(60 * 60);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setDomain("university-rest-server.herokuapp.com");
+        return cookie;
+    }
 }

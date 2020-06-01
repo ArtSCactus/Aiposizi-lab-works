@@ -22,8 +22,10 @@ import java.util.Collections;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nullable
     private Long id;
     @Column(name="google_id", length = 2000)
+    @Nullable
     private String googleId;
     @Column(name = "name")
     @NotEmpty
@@ -31,14 +33,15 @@ public class User implements UserDetails {
     @Pattern(regexp = "[A-zА-я]{1,30}")
     private String name;
     @Column(name = "email")
-    @Pattern(regexp = "[A-zА-я_]{1,20}@[A-z]{1,10}.(com|org|ru|by)")
+    @Pattern(regexp = "[A-zА-я_0-9]{1,20}@[A-z]{1,10}.(com|org|ru|by)")
     private String email;
     @Column(name = "password")
     @Nullable
-    @Pattern(regexp="[^<>\"\\s]{3,45}")
+    @Pattern(regexp="[^<>\"'\\s]{3,500}")
     private String password;
     @Column(name= "authority")
     @Enumerated(EnumType.STRING)
+    @Nullable
     private Authority authority;
 
     public User() {
